@@ -49,7 +49,7 @@ jobs:
 
       - name: 🧠 Run PHPStan (static analysis)
         working-directory: ./laravel
-        run: vendor/bin/phpstan analyse --no-progress
+        run: vendor/bin/phpstan analyse --no-progress --configuration=phpstan.neon
 
       - name: 🛠 Copy .env
         working-directory: ./laravel

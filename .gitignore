@@ -16,7 +16,6 @@ npm-debug.log
 
 # Laravel test coverage
 laravel/tests/_output/
-laravel/phpunit.xml
 
 # Laravel Docker
 laravel/.phpunit.result.cache
@@ -38,7 +37,6 @@ docker/postgres/
 # ---- Global ----
 *.log
 *.env
-.env.*
 .DS_Store
 *.bak
 *.swp
