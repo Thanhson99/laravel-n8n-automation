@@ -1,0 +1,48 @@
+# ---- Laravel ----
+/laravel/vendor/
+/laravel/node_modules/
+laravel/.env
+laravel/storage/*.key
+laravel/storage/logs/*
+laravel/bootstrap/cache/*
+laravel/public/storage
+laravel/.idea/
+laravel/.vscode/
+
+# Composer / NPM
+composer.lock
+package-lock.json
+npm-debug.log
+
+# Laravel test coverage
+laravel/tests/_output/
+laravel/phpunit.xml
+
+# Laravel Docker
+laravel/.phpunit.result.cache
+
+# ---- N8N ----
+/n8n/.n8n
+/n8n/files
+/n8n/database.sqlite
+/n8n/.env
+/n8n/node_modules/
+/n8n/tmp/
+
+# ---- Docker ----
+docker/mysql/
+docker/postgres/
+*.pid
+*.sock
+
+# ---- Global ----
+*.log
+*.env
+.env.*
+.DS_Store
+*.bak
+*.swp
+*.zip
+*.tar.gz
+.idea/
+.vscode/
