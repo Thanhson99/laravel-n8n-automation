@@ -18,7 +18,7 @@ This repository is created for learning and applying:
 - [x] Create initial repository
 - [x] Setup Docker Compose for Laravel + N8N
 - [x] Configure GitHub Actions for CI/CD
-- [ ] Auto-deploy to VPS or server
+- [x] Auto-deploy to VPS or server
 - [ ] Integrate AI code review (optional / later)
 
 ---
