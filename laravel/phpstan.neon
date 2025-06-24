@@ -1,0 +1,13 @@
+parameters:
+  level: 8
+
+  paths:
+    - app
+    - routes
+
+  excludePaths:
+    - tests/*
+    - database/*
+    - bootstrap/*
+    - storage/*
+    - vendor/*
