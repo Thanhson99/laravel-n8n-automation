@@ -1,0 +1,31 @@
+name: Auto Deploy to VPS
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Check if SSH key is placeholder or real
+        run: |
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > key.pem
+          chmod 600 key.pem
+          
+          if grep -q "FAKE_KEY_PLACEHOLDER" key.pem; then
+            echo "⚠️ Placeholder SSH key detected. Skipping deployment."
+          else
+            echo "✅ Real SSH key detected. Proceeding to deploy..."
+
+            ssh -i key.pem -o StrictHostKeyChecking=no user@your.vps.ip << 'EOF'
+              cd /path/to/your/project
+              git pull origin main
+              docker-compose down
+              docker-compose up -d --build
+            EOF
+          fi
