@@ -16,8 +16,8 @@ This repository is created for learning and applying:
 ## 🚀 Roadmap
 
 - [x] Create initial repository
-- [ ] Setup Docker Compose for Laravel + N8N
-- [ ] Configure GitHub Actions for CI/CD
+- [x] Setup Docker Compose for Laravel + N8N
+- [x] Configure GitHub Actions for CI/CD
 - [ ] Auto-deploy to VPS or server
 - [ ] Integrate AI code review (optional / later)
 
