@@ -1,0 +1,34 @@
+name: CI - N8N Workflows
+
+on:
+  push:
+    paths:
+      - 'n8n/**'
+      - 'docker-compose.yml'
+  pull_request:
+    paths:
+      - 'n8n/**'
+      - 'docker-compose.yml'
+
+jobs:
+  n8n-check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Validate N8N workflow JSON
+        run: |
+          echo "✅ Validating N8N workflow files..."
+          if [ -d "n8n/workflows" ] && ls n8n/workflows/*.json 1> /dev/null 2>&1; then
+            for file in n8n/workflows/*.json; do
+              jq empty "$file" || { echo "❌ Invalid JSON: $file"; exit 1; }
+            done
+            echo "🎉 All workflows are valid!"
+          else
+            echo "ℹ️ No workflow JSON files found, skipping validation."
+          fi
+
+      - name: Check if docker-compose.yml exists
+        run: |
+          test -f docker-compose.yml && echo "✅ Docker Compose found." || exit 1
