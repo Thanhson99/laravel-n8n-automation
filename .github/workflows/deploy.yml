@@ -12,20 +12,20 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Check if SSH key is placeholder or real
+      - name: Setup SSH Key
         run: |
           echo "${{ secrets.SSH_PRIVATE_KEY }}" > key.pem
           chmod 600 key.pem
-          
+
+      - name: Deploy if SSH key is real
+        run: |
           if grep -q "FAKE_KEY_PLACEHOLDER" key.pem; then
             echo "⚠️ Placeholder SSH key detected. Skipping deployment."
           else
-            echo "✅ Real SSH key detected. Proceeding to deploy..."
-
-            ssh -i key.pem -o StrictHostKeyChecking=no user@your.vps.ip << 'EOF'
-              cd /path/to/your/project
-              git pull origin main
-              docker-compose down
-              docker-compose up -d --build
-            EOF
+            echo "✅ Real SSH key detected. Deploying..."
+            ssh -o StrictHostKeyChecking=no -i key.pem user@your.vps.ip " \
+              cd /path/to/your/project && \
+              git pull origin main && \
+              docker-compose down && \
+              docker-compose up -d --build"
           fi
