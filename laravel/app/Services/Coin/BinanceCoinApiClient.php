@@ -15,22 +15,32 @@ class BinanceCoinApiClient implements CoinApiClientInterface
 
     public function __construct()
     {
-        $this->baseUrl = config('services.binance.base_url', 'https://api.binance.com');
+        $baseUrl = config('services.binance.base_url', 'https://api.binance.com');
+
+        $this->baseUrl = is_string($baseUrl) ? $baseUrl : 'https://api.binance.com';
     }
 
     /**
      * Get market data for top coins.
+     *
+     * @return array<int, array<string, mixed>>
      */
     public function fetchTopCoins(): array
     {
         $response = Http::get($this->baseUrl.'/api/v3/ticker/24hr');
 
         if ($response->successful()) {
-            return collect($response->json())
+            /** @var array<int, array<string, mixed>> $data */
+            $data = $response->json();
+
+            /** @var array<int, array<string, mixed>> $result */
+            $result = collect($data)
                 ->sortByDesc('quoteVolume')
                 ->take(10)
                 ->values()
                 ->toArray();
+
+            return $result;
         }
 
         return [];
@@ -38,6 +48,8 @@ class BinanceCoinApiClient implements CoinApiClientInterface
 
     /**
      * Get detailed info for a specific coin.
+     *
+     * @return array<string, mixed>|null
      */
     public function fetchCoinDetail(string $coinId): ?array
     {
@@ -45,6 +57,13 @@ class BinanceCoinApiClient implements CoinApiClientInterface
             'symbol' => strtoupper($coinId),
         ]);
 
-        return $response->successful() ? $response->json() : null;
+        if ($response->successful()) {
+            /** @var array<string, mixed> $result */
+            $result = $response->json();
+
+            return $result;
+        }
+
+        return null;
     }
 }

@@ -21,6 +21,8 @@ class BinanceCoinService implements CoinServiceInterface
 
     /**
      * Get a list of top coins with pricing info.
+     *
+     * @return array<int, array<string, mixed>>
      */
     public function getTopCoins(): array
     {
@@ -29,6 +31,8 @@ class BinanceCoinService implements CoinServiceInterface
 
     /**
      * Get detailed info for a specific coin.
+     *
+     * @return array<string, mixed>
      */
     public function getCoinById(string $coinId): ?array
     {

@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Services\Coin\CoinServiceFactory;
+use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
-use Illuminate\View\View;
 
 /**
  * Class CoinController
@@ -19,7 +19,8 @@ class CoinController extends Controller
     public function index(Request $request): View
     {
         // Default is binance
-        $source = $request->get('source', 'binance');
+        $rawSource = $request->get('source', 'binance');
+        $source = is_string($rawSource) ? $rawSource : 'binance';
         $coinService = CoinServiceFactory::make($source);
 
         $coins = $coinService->getTopCoins();
