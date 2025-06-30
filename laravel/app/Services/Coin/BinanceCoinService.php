@@ -2,9 +2,6 @@
 
 namespace App\Services\Coin;
 
-use App\Services\Coin\CoinServiceInterface;
-use App\Services\Coin\CoinApiClientInterface;
-
 /**
  * Class BinanceCoinService
  *
@@ -16,8 +13,6 @@ class BinanceCoinService implements CoinServiceInterface
 
     /**
      * BinanceCoinService constructor.
-     *
-     * @param CoinApiClientInterface $client
      */
     public function __construct(CoinApiClientInterface $client)
     {
@@ -26,8 +21,6 @@ class BinanceCoinService implements CoinServiceInterface
 
     /**
      * Get a list of top coins with pricing info.
-     *
-     * @return array
      */
     public function getTopCoins(): array
     {
@@ -36,9 +29,6 @@ class BinanceCoinService implements CoinServiceInterface
 
     /**
      * Get detailed info for a specific coin.
-     *
-     * @param string $coinId
-     * @return array|null
      */
     public function getCoinById(string $coinId): ?array
     {

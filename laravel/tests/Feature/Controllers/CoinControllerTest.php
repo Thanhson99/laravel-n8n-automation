@@ -2,19 +2,16 @@
 
 namespace Tests\Feature\Controllers;
 
-use App\Http\Controllers\CoinController;
 use App\Services\Coin\CoinServiceInterface;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Support\Facades\View;
 use Tests\TestCase;
 
 class CoinControllerTest extends TestCase
 {
-    public function testIndexReturnsViewWithCoins()
+    public function test_index_returns_view_with_coins()
     {
         $mockService = $this->createMock(CoinServiceInterface::class);
         $mockService->method('getTopCoins')->willReturn([
-            ['symbol' => 'BTCUSDT', 'price' => 30000]
+            ['symbol' => 'BTCUSDT', 'price' => 30000],
         ]);
 
         // Giả lập factory trả về mock

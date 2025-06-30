@@ -2,7 +2,6 @@
 
 namespace App\Services\Coin;
 
-use App\Services\Coin\CoinApiClientInterface;
 use Illuminate\Support\Facades\Http;
 
 /**
@@ -21,12 +20,10 @@ class BinanceCoinApiClient implements CoinApiClientInterface
 
     /**
      * Get market data for top coins.
-     *
-     * @return array
      */
     public function fetchTopCoins(): array
     {
-        $response = Http::get($this->baseUrl . '/api/v3/ticker/24hr');
+        $response = Http::get($this->baseUrl.'/api/v3/ticker/24hr');
 
         if ($response->successful()) {
             return collect($response->json())
@@ -41,13 +38,10 @@ class BinanceCoinApiClient implements CoinApiClientInterface
 
     /**
      * Get detailed info for a specific coin.
-     *
-     * @param string $coinId
-     * @return array|null
      */
     public function fetchCoinDetail(string $coinId): ?array
     {
-        $response = Http::get($this->baseUrl . '/api/v3/ticker/24hr', [
+        $response = Http::get($this->baseUrl.'/api/v3/ticker/24hr', [
             'symbol' => strtoupper($coinId),
         ]);
 

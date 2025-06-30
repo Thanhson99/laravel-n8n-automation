@@ -2,7 +2,6 @@
 
 namespace App\Services\Coin;
 
-use App\Services\Coin\BinanceCoinService;
 use InvalidArgumentException;
 
 /**
@@ -14,9 +13,6 @@ class CoinServiceFactory
 {
     /**
      * Resolve service by source name.
-     *
-     * @param string $source
-     * @return CoinServiceInterface
      */
     public static function make(string $source): CoinServiceInterface
     {

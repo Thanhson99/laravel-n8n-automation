@@ -15,7 +15,7 @@ class AppServiceProvider extends ServiceProvider
             \App\Services\Coin\CoinApiClientInterface::class,
             \App\Services\Coin\BinanceCoinApiClient::class
         );
-        
+
         $this->app->bind(
             \App\Services\Coin\CoinServiceInterface::class,
             \App\Services\Coin\BinanceCoinService::class

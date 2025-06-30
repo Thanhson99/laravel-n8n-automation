@@ -8,11 +8,11 @@ use PHPUnit\Framework\TestCase;
 
 class BinanceCoinServiceTest extends TestCase
 {
-    public function testGetTopCoinsReturnsData()
+    public function test_get_top_coins_returns_data()
     {
         $mockClient = $this->createMock(CoinApiClientInterface::class);
         $mockClient->method('fetchTopCoins')
-                   ->willReturn([['symbol' => 'BTCUSDT', 'price' => 30000]]);
+            ->willReturn([['symbol' => 'BTCUSDT', 'price' => 30000]]);
 
         $service = new BinanceCoinService($mockClient);
         $result = $service->getTopCoins();
@@ -21,12 +21,12 @@ class BinanceCoinServiceTest extends TestCase
         $this->assertEquals('BTCUSDT', $result[0]['symbol']);
     }
 
-    public function testGetCoinByIdReturnsCorrectCoin()
+    public function test_get_coin_by_id_returns_correct_coin()
     {
         $mockClient = $this->createMock(CoinApiClientInterface::class);
         $mockClient->method('fetchCoinDetail')
-                   ->with('BTCUSDT')
-                   ->willReturn(['symbol' => 'BTCUSDT', 'price' => 30000]);
+            ->with('BTCUSDT')
+            ->willReturn(['symbol' => 'BTCUSDT', 'price' => 30000]);
 
         $service = new BinanceCoinService($mockClient);
         $coin = $service->getCoinById('BTCUSDT');
