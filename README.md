@@ -10,6 +10,7 @@ This repository is created for learning and applying:
 - CI/CD pipelines using **GitHub Actions**
 - Docker-based development for **Laravel** and **N8N**
 - Workflow automation and future AI integration
+- Building real-world microservices related to Blockchain, Dropshipping, and automated workflows
 
 ---
 
@@ -19,7 +20,11 @@ This repository is created for learning and applying:
 - [x] Setup Docker Compose for Laravel + N8N
 - [x] Configure GitHub Actions for CI/CD
 - [x] Auto-deploy to VPS or server
-- [ ] Integrate AI code review (optional / later)
+- [x] Integrate AI code review (optional / later)
+- [ ] Start developing Blockchain service layer
+- [ ] Design and integrate Dropshipping workflow
+- [ ] Build automated task pipelines using N8N
+- [ ] Explore payment gateway + smart contract handling
 
 ---
 
@@ -44,3 +49,9 @@ Edit
 > 🧠 Status: Learning phase  
 > 🕓 Started: June 2025  
 > 📦 Stack: Laravel, N8N, Docker, GitHub Actions  
+
+> 🧠 Status (updated)
+> 🧠 Status: Learning + Expanding into production use cases
+> 🕓 Started: June 2025
+> 🔄 Expanded: July 2025 — Blockchain, Dropshipping, Workflow automation
+> 📦 Stack: Laravel, N8N, Docker, GitHub Actions, Solidity
