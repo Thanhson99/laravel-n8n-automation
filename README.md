@@ -40,18 +40,14 @@ This repository is created for learning and applying:
 └── README.md
 ```
 
-yaml
-Copy
-Edit
-
 ---
 
 > 🧠 Status: Learning phase  
 > 🕓 Started: June 2025  
 > 📦 Stack: Laravel, N8N, Docker, GitHub Actions  
 
-> 🧠 Status (updated)
-> 🧠 Status: Learning + Expanding into production use cases
-> 🕓 Started: June 2025
-> 🔄 Expanded: July 2025 — Blockchain, Dropshipping, Workflow automation
-> 📦 Stack: Laravel, N8N, Docker, GitHub Actions, Solidity
+> 🧠 Status (updated)  
+> 🧠 Status: Learning + Expanding into production use cases  
+> 🕓 Started: June 2025  
+> 🔄 Expanded: July 2025 — Blockchain, Dropshipping, Workflow automation  
+> 📦 Stack: Laravel, N8N, Docker, GitHub Actions, Solidity  
