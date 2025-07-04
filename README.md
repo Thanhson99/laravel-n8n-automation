@@ -1,16 +1,27 @@
-# Laravel + N8N DevOps
+# Laravel + N8N DevOps Demo
 
-> 🔧 CI/CD learning project with Laravel and N8N (Docker-based setup)
+> 🔧 CI/CD & Automation demo project integrating Laravel, N8N, and Docker
 
 ---
 
 ## 📘 Project Purpose
 
-This repository is created for learning and applying:
+This repository was created for learning and experimenting with:
 - CI/CD pipelines using **GitHub Actions**
-- Docker-based development for **Laravel** and **N8N**
-- Workflow automation and future AI integration
-- Building real-world microservices related to Blockchain, Dropshipping, and automated workflows
+- Docker-based development environment for **Laravel** and **N8N**
+- Workflow automation with potential AI integration
+- Building real-world microservices for Blockchain, Dropshipping, and business automation
+
+This is a demo project and will be expanded to include additional use cases with **Python** and **N8N**, such as:
+- Auto Trading Bots
+- Real-time Alert Systems
+- Full Workflow Automation
+- Dropshipping Integrations
+
+📬 **For collaboration or inquiries, feel free to contact me:**
+- Facebook: [https://www.facebook.com/son.vi.99](https://www.facebook.com/son.vi.99)  
+- Email: `sonvi10101999@gmail.com`  
+- Telegram: `0337 517 047`
 
 ---
 
@@ -25,10 +36,11 @@ This repository is created for learning and applying:
 - [ ] Design and integrate Dropshipping workflow
 - [ ] Build automated task pipelines using N8N
 - [ ] Explore payment gateway + smart contract handling
+- [ ] Add Python + N8N automation modules (auto trading, alerting, scraping, etc.)
 
 ---
 
-## 🗂 Project Structure (planned)
+## 🗂 Project Structure (Planned)
 
 ```
 /
@@ -42,12 +54,17 @@ This repository is created for learning and applying:
 
 ---
 
-> 🧠 Status: Learning phase  
-> 🕓 Started: June 2025  
-> 📦 Stack: Laravel, N8N, Docker, GitHub Actions  
+## 🧠 Project Status
 
-> 🧠 Status (updated)  
-> 🧠 Status: Learning + Expanding into production use cases  
-> 🕓 Started: June 2025  
-> 🔄 Expanded: July 2025 — Blockchain, Dropshipping, Workflow automation  
-> 📦 Stack: Laravel, N8N, Docker, GitHub Actions, Solidity  
+- **Phase**: Learning + Expanding into production use cases  
+- **Started**: June 2025  
+- **Expanded**: July 2025 – Blockchain, Dropshipping, Workflow Automation  
+- **Tech Stack**: Laravel, N8N, Docker, GitHub Actions, Solidity, Python
+
+---
+
+## 📂 Suggested Branch Name
+
+**main**
+
+> Use this branch for tracking initial implementation and multi-service expansion.
