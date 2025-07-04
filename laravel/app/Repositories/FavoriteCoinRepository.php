@@ -10,6 +10,8 @@ use App\Models\FavoriteCoin;
  * Class FavoriteCoinRepository
  *
  * Handles data operations related to favorite coins.
+ *
+ * @extends BaseRepository<FavoriteCoin>
  */
 class FavoriteCoinRepository extends BaseRepository implements FavoriteCoinRepositoryInterface
 {
@@ -28,7 +30,7 @@ class FavoriteCoinRepository extends BaseRepository implements FavoriteCoinRepos
      */
     public function getAllSymbols(): array
     {
-        return $this->model->pluck('symbol')->toArray();
+        return $this->model->newQuery()->pluck('symbol')->toArray();
     }
 
     /**
@@ -45,7 +47,7 @@ class FavoriteCoinRepository extends BaseRepository implements FavoriteCoinRepos
         $symbol = strtoupper($symbol);
 
         // Check if the symbol is already marked as favorite
-        $existing = $this->model->where('symbol', $symbol)->first();
+        $existing = $this->model->newQuery()->where('symbol', $symbol)->first();
 
         if ($existing) {
             $existing->delete();
@@ -57,7 +59,7 @@ class FavoriteCoinRepository extends BaseRepository implements FavoriteCoinRepos
         }
 
         // Add new favorite entry
-        $this->model->create(['symbol' => $symbol]);
+        $this->model->newQuery()->create(['symbol' => $symbol]);
 
         return [
             'message' => 'Added to favorites',
