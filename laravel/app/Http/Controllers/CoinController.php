@@ -1,8 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers;
 
-use App\Services\Coin\CoinServiceFactory;
+use App\Services\Coin\CoinServiceInterface;
+use App\Services\Coin\FavoriteCoinServiceInterface;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 
@@ -13,18 +16,30 @@ use Illuminate\Http\Request;
  */
 class CoinController extends Controller
 {
+    public function __construct(
+        protected CoinServiceInterface $coinService,
+        protected FavoriteCoinServiceInterface $favoriteCoinService
+    ) {}
+
     /**
      * Display a list of popular coins from selected source.
      */
     public function index(Request $request): View
     {
-        // Default is binance
-        $rawSource = $request->get('source', 'binance');
-        $source = is_string($rawSource) ? $rawSource : 'binance';
-        $coinService = CoinServiceFactory::make($source);
+        $coins = $this->coinService->getTopCoins();
+        $favorites = $this->favoriteCoinService->getSymbols();
+        $source = $request->get('source', 'binance');
 
-        $coins = $coinService->getTopCoins();
+        return view('coins.index', compact('coins', 'favorites', 'source'));
+    }
 
-        return view('coins.index', compact('coins', 'source'));
+    /**
+     * Display detail of a single coin.
+     */
+    public function show(string $symbol): View
+    {
+        $coins = $this->coinService->getCoinById($symbol);
+
+        return view('coins.show', compact('coins'));
     }
 }

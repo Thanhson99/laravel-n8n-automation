@@ -1,0 +1,34 @@
+<!-- layouts/app.blade.php -->
+@extends('adminlte::page')
+
+@section('css')
+    <!-- Global CSS -->
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+    @stack('page_css')
+@endsection
+
+@section('js')
+    <!-- Global JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
+    <!-- Handle Laravel flash messages -->
+    <script>
+        @if(session('success'))
+            toastr.success(@json(session('success')), 'Success');
+        @endif
+
+        @if(session('error'))
+            toastr.error(@json(session('error')), 'Error');
+        @endif
+
+        @if(session('info'))
+            toastr.info(@json(session('info')), 'Info');
+        @endif
+
+        @if(session('warning'))
+            toastr.warning(@json(session('warning')), 'Warning');
+        @endif
+    </script>
+
+    @stack('page_js')
+@endsection

@@ -1,0 +1,46 @@
+<?php
+
+declare(strict_types=1);
+
+namespace App\Http\Controllers\Api;
+
+use App\Http\Controllers\Controller;
+use App\Services\Coin\FavoriteCoinServiceInterface;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
+
+/**
+ * Class FavoriteCoinController
+ *
+ * Handles API requests related to user's favorite coins.
+ */
+class FavoriteCoinController extends Controller
+{
+    public function __construct(
+        protected FavoriteCoinServiceInterface $favoriteCoinService
+    ) {}
+
+    /**
+     * Toggle favorite status for a coin.
+     */
+    public function favoritesToggle(Request $request): JsonResponse
+    {
+        $symbol = strtoupper($request->input('symbol'));
+
+        // Validate symbol format (3-10 uppercase letters or numbers)
+        if (! preg_match('/^[A-Z0-9]{3,10}$/', $symbol)) {
+            return response()->json([
+                'message' => 'Invalid symbol',
+                'success' => false,
+            ], 400);
+        }
+
+        $result = $this->favoriteCoinService->toggleSymbol($symbol);
+
+        return response()->json([
+            'message' => $result['message'],
+            'status' => $result['status'],
+            'success' => true,
+        ]);
+    }
+}
