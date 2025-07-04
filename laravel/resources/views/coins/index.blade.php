@@ -2,19 +2,23 @@
 
 @section('title', 'Top Coins')
 
+@push('meta')
+    <meta name="toggle-favorite-url" content="{{ route('favorites.toggle') }}">
+@endpush
+
 @section('content_header')
     <h1>Top Coins (Source: {{ ucfirst($source) }})</h1>
 @endsection
 
 @section('content')
     <div class="table-responsive">
-        <table class="table table-bordered table-striped">
+        <table class="table table-bordered table-striped datatable">
             <thead>
                 <tr>
-                    <th>Symbol</th>
-                    <th>Price</th>
-                    <th>Volume</th>
-                    <th>Change (%)</th>
+                    <th data-column="0">Symbol <i class="fas fa-sort text-muted ms-1"></i></th>
+                    <th data-column="1">Price <i class="fas fa-sort text-muted ms-1"></i></th>
+                    <th data-column="2">Volume <i class="fas fa-sort text-muted ms-1"></i></th>
+                    <th data-column="3">Change (%) <i class="fas fa-sort text-muted ms-1"></i></th>
                     <th>Favourite</th>
                 </tr>
             </thead>
@@ -40,45 +44,3 @@
         </table>
     </div>
 @endsection
-
-@push('page_js')
-    <script>
-        const toggleFavoriteUrl = @json(route('favorites.toggle'));
-
-        $(function () {
-            $('.favorite-toggle').on('click', function (e) {
-                e.preventDefault();
-
-                const symbol = $(this).data('symbol');
-                const icon = $(this).find('i');
-
-                $.ajax({
-                    url: toggleFavoriteUrl,
-                    method: 'POST',
-                    headers: {
-                        'X-CSRF-TOKEN': '{{ csrf_token() }}',
-                    },
-                    data: {
-                        symbol: symbol
-                    },
-                    success: function (response) {
-                        if (response.success) {
-                            if (icon.hasClass('fas')) {
-                                icon.removeClass('fas text-danger').addClass('far text-muted');
-                            } else {
-                                icon.removeClass('far text-muted').addClass('fas text-danger');
-                            }
-                            toastr.success(response.message);
-                        } else {
-                            toastr.error(response.message || 'Something went wrong.');
-                        }
-                    },
-                    error: function () {
-                        toastr.error('Server error. Please try again.');
-                    }
-                });
-            });
-        });
-    </script>
-@endpush
-

@@ -4,12 +4,19 @@
 @section('css')
     <!-- Global CSS -->
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+    
     @stack('page_css')
+
+    @stack('meta')
+
+    @vite(['resources/scss/app.scss'])
 @endsection
 
 @section('js')
     <!-- Global JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <!-- DataTables -->
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
 
     <!-- Handle Laravel flash messages -->
     <script>
@@ -31,4 +38,6 @@
     </script>
 
     @stack('page_js')
+
+    @vite(['resources/js/app.js'])
 @endsection
