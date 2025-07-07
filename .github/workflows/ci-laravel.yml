@@ -39,17 +39,21 @@ jobs:
           extensions: mbstring, bcmath, pdo, mysql
           tools: composer:v2
 
-      - name: 📦 Install dependencies
+      - name: ♻️ Cache Node Modules
+        uses: actions/cache@v3
+        with:
+          path: ./laravel/node_modules
+          key: ${{ runner.os }}-node-${{ hashFiles('./laravel/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+      - name: 📦 Install PHP dependencies
         working-directory: ./laravel
         run: composer install --prefer-dist --no-progress --no-suggest
 
-      - name: 🧪 Run Pint (format check)
+      - name: 📦 Install NPM dependencies
         working-directory: ./laravel
-        run: vendor/bin/pint --test
-
-      - name: 🧠 Run PHPStan (static analysis)
-        working-directory: ./laravel
-        run: vendor/bin/phpstan analyse --no-progress --configuration=phpstan.neon
+        run: npm install
 
       - name: 🛠 Copy .env
         working-directory: ./laravel
@@ -59,9 +63,21 @@ jobs:
         working-directory: ./laravel
         run: php artisan key:generate
 
+      - name: 🧱 Build Vite assets
+        working-directory: ./laravel
+        run: npm run build
+
       - name: 🧱 Run migrations
         working-directory: ./laravel
         run: php artisan migrate --force
+
+      - name: 🧪 Run Pint (format check)
+        working-directory: ./laravel
+        run: vendor/bin/pint --test
+
+      - name: 🧠 Run PHPStan (static analysis)
+        working-directory: ./laravel
+        run: vendor/bin/phpstan analyse --no-progress --configuration=phpstan.neon
 
       - name: 🧪 Run tests
         working-directory: ./laravel
