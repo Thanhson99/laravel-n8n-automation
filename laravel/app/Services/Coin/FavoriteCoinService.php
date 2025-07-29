@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Services\Coin;
 
-use App\Repositories\FavoriteCoinRepositoryInterface;
+use App\Repositories\Coin\Interfaces\FavoriteCoinRepositoryInterface;
 
 /**
  * Class FavoriteCoinService

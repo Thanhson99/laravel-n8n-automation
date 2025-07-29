@@ -4,41 +4,47 @@ declare(strict_types=1);
 
 namespace App\Providers;
 
+use App\Repositories\Coin\FavoriteCoinRepository;
+use App\Repositories\Coin\Interfaces\FavoriteCoinRepositoryInterface;
+use App\Repositories\Coin\FeedKeywordRepository;
+use App\Repositories\Coin\Interfaces\FeedKeywordRepositoryInterface;
+use App\Repositories\Coin\Interfaces\TagRepositoryInterface;
+use App\Repositories\Eloquent\TagRepository;
+use App\Services\Coin\BinanceCoinApiClient;
+use App\Services\Coin\CoinApiClientInterface;
 use App\Services\Coin\CoinServiceFactory;
+use App\Services\Coin\FavoriteCoinService;
+use App\Services\Coin\FavoriteCoinServiceInterface;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\ServiceProvider;
 
 /**
  * Class AppServiceProvider
  *
- * Registers and bootstraps application services and bindings.
+ * Responsible for registering and bootstrapping application services.
  */
 class AppServiceProvider extends ServiceProvider
 {
     /**
-     * Register any application services.
+     * Register all application service bindings.
+     *
+     * @return void
      */
     public function register(): void
     {
-        // Bind CoinApiClientInterface to default Binance implementation
-        $this->app->bind(
-            \App\Services\Coin\CoinApiClientInterface::class,
-            \App\Services\Coin\BinanceCoinApiClient::class
-        );
+        // Bind the Coin API client interface to Binance implementation by default
+        $this->app->bind(CoinApiClientInterface::class, BinanceCoinApiClient::class);
 
-        // Bind FavoriteCoinRepositoryInterface to concrete repository
-        $this->app->bind(
-            \App\Repositories\FavoriteCoinRepositoryInterface::class,
-            \App\Repositories\FavoriteCoinRepository::class
-        );
+        // Bind the FavoriteCoin repository and service
+        $this->app->bind(FavoriteCoinRepositoryInterface::class, FavoriteCoinRepository::class);
+        $this->app->bind(FavoriteCoinServiceInterface::class, FavoriteCoinService::class);
 
-        // Bind FavoriteCoinServiceInterface to its implementation
-        $this->app->bind(
-            \App\Services\Coin\FavoriteCoinServiceInterface::class,
-            \App\Services\Coin\FavoriteCoinService::class
-        );
+        // Bind the Tag repository
+        $this->app->bind(TagRepositoryInterface::class, TagRepository::class);
 
-        // Dynamically resolve CoinServiceInterface based on ?source= query param
+        $this->app->bind(FeedKeywordRepositoryInterface::class, FeedKeywordRepository::class);
+
+        // Dynamically bind CoinServiceInterface based on the "source" query parameter
         $this->app->bind(
             \App\Services\Coin\CoinServiceInterface::class,
             function () {
@@ -50,10 +56,12 @@ class AppServiceProvider extends ServiceProvider
     }
 
     /**
-     * Bootstrap any application services.
+     * Bootstrap application services.
+     *
+     * @return void
      */
     public function boot(): void
     {
-        //
+        // No boot logic required for now
     }
 }
