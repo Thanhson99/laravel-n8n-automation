@@ -6,53 +6,76 @@ namespace App\Services\Coin;
 
 use App\Repositories\Coin\FeedKeywordRepository;
 use App\Repositories\Coin\TagRepository;
+use App\Models\FeedKeyword;
 
 class FeedKeywordService
 {
-    protected FeedKeywordRepository $keywordRepo;
-    protected TagRepository $tagRepo;
-
+    /**
+     * FeedKeywordService constructor.
+     *
+     * @param FeedKeywordRepositoryInterface $keywordRepo
+     * @param TagRepositoryInterface $tagRepo
+     */
     public function __construct(
-        FeedKeywordRepository $keywordRepo,
-        TagRepository $tagRepo
+        protected FeedKeywordRepository $keywordRepo,
+        protected TagRepository $tagRepo
     ) {
-        $this->keywordRepo = $keywordRepo;
-        $this->tagRepo = $tagRepo;
     }
 
     /**
-     * Create keyword with tags
+     * Create a new feed keyword with associated tags.
+     *
+     * @param array<string, mixed> $data
+     * @return int  The ID of the created feed keyword.
      */
     public function create(array $data): int
     {
-        $id = $this->keywordRepo->create($data);
+        /** @var FeedKeyword $keyword */
+        $keyword = $this->keywordRepo->create($data);
 
-        if (!empty($data['tags'])) {
+        if (!empty($data['tags']) && is_array($data['tags'])) {
             $tagIds = $this->tagRepo->getOrCreateTags($data['tags']);
-            $this->keywordRepo->syncTags($id, $tagIds);
+            $this->keywordRepo->syncTags($keyword->id, $tagIds);
         }
 
-        return $id;
+        return $keyword->id;
     }
 
     /**
-     * Update keyword with tags
+     * Update an existing feed keyword and sync its tags.
+     *
+     * @param int $id  Feed keyword ID.
+     * @param array<string, mixed> $data  Updated data.
+     * @return void
      */
     public function update(int $id, array $data): void
     {
         $this->keywordRepo->update($id, $data);
 
-        if (!empty($data['tags'])) {
+        if (!empty($data['tags']) && is_array($data['tags'])) {
             $tagIds = $this->tagRepo->getOrCreateTags($data['tags']);
             $this->keywordRepo->syncTags($id, $tagIds);
         }
     }
 
     /**
-     * Delete keyword
+     * Delete a feed keyword by its ID.
+     *
+     * @param int $id  Feed keyword ID.
+     * @return void
      */
     public function delete(int $id): void
     {
         $this->keywordRepo->delete($id);
+    }
+
+    /**
+     * Get all feed keywords with tags.
+     *
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
+    public function getAllWithTags()
+    {
+        return $this->keywordRepo->allWithTags();
     }
 }

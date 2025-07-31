@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 /**
  * Class FeedKeyword
@@ -44,4 +45,14 @@ class FeedKeyword extends Model
     protected $casts = [
         'active' => 'boolean',
     ];
+    
+    /**
+     * Get all tags associated with the feed keyword.
+     *
+     * @return BelongsToMany
+     */
+    public function tags(): BelongsToMany
+    {
+        return $this->belongsToMany(Tag::class, 'feed_keyword_tag', 'feed_keyword_id', 'tag_id');
+    }
 }

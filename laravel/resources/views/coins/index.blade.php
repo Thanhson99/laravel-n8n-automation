@@ -44,3 +44,7 @@
         </table>
     </div>
 @endsection
+
+@push('scripts')
+    <script src="{{ asset('js/pages/coin-favorites-table.js') }}"></script>
+@endpush

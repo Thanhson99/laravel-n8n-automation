@@ -55,4 +55,12 @@ interface TagRepositoryInterface
      * @return bool
      */
     public function delete(int $id): bool;
+    
+    /**
+    * Get existing tag IDs or create them if not exist.
+    *
+    * @param array<string> $tagNames
+    * @return array<int> Tag IDs.
+    */
+   public function getOrCreateTags(array $tagNames): array;
 }

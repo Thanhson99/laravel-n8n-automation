@@ -102,4 +102,14 @@ class FeedKeywordRepository extends BaseRepository implements FeedKeywordReposit
 
         return $keyword ? $keyword->delete() : false;
     }
+
+    /**
+     * Get all feed keywords with tags.
+     *
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
+    public function allWithTags()
+    {
+        return $this->model->newQuery()->with('tags')->latest()->get();
+    }
 }

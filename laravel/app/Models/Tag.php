@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 /**
  * Class Tag
@@ -31,4 +32,14 @@ class Tag extends Model
     protected $fillable = [
         'name',
     ];
+
+    /**
+     * Get all feed keywords associated with this tag.
+     *
+     * @return BelongsToMany
+     */
+    public function keywords(): BelongsToMany
+    {
+        return $this->belongsToMany(FeedKeyword::class, 'feed_keyword_tag', 'tag_id', 'feed_keyword_id');
+    }
 }

@@ -1,0 +1,155 @@
+{
+  "name": "Favourite Coin Alert",
+  "nodes": [
+    {
+      "parameters": {
+        "pollTimes": {
+          "item": [
+            {
+              "mode": "everyMinute"
+            }
+          ]
+        },
+        "feedUrl": "https://cointelegraph.com/rss"
+      },
+      "type": "n8n-nodes-base.rssFeedReadTrigger",
+      "typeVersion": 1,
+      "position": [
+        -288,
+        -112
+      ],
+      "id": "82eda8a0-d347-411a-b0b7-a3b491e40c42",
+      "name": "RSS Cointelegraph"
+    },
+    {
+      "parameters": {
+        "pollTimes": {
+          "item": [
+            {
+              "mode": "everyMinute"
+            }
+          ]
+        },
+        "feedUrl": "https://decrypt.co/feed"
+      },
+      "type": "n8n-nodes-base.rssFeedReadTrigger",
+      "typeVersion": 1,
+      "position": [
+        -288,
+        112
+      ],
+      "id": "41e4a816-a67f-4ea0-9875-fc5a2023a006",
+      "name": "RSS Decrypt"
+    },
+    {
+      "parameters": {
+        "pollTimes": {
+          "item": [
+            {
+              "mode": "everyMinute"
+            }
+          ]
+        },
+        "feedUrl": "https://bitcoinmagazine.com/.rss/full/"
+      },
+      "type": "n8n-nodes-base.rssFeedReadTrigger",
+      "typeVersion": 1,
+      "position": [
+        -288,
+        336
+      ],
+      "id": "bf7aa888-6597-4274-becc-56e17d941484",
+      "name": "RSS Bitcoin Magazine"
+    },
+    {
+      "parameters": {
+        "pollTimes": {
+          "item": [
+            {
+              "mode": "everyMinute"
+            }
+          ]
+        },
+        "feedUrl": "https://www.coindesk.com/arc/outboundfeeds/rss/"
+      },
+      "type": "n8n-nodes-base.rssFeedReadTrigger",
+      "typeVersion": 1,
+      "position": [
+        -288,
+        560
+      ],
+      "id": "ef4399ca-89f1-433c-a58d-f10f34008dc4",
+      "name": "RSS CoinDesk"
+    },
+    {
+      "parameters": {
+        "numberInputs": 4
+      },
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        64,
+        192
+      ],
+      "id": "8fddbf62-b3f3-4718-beb2-859e9377506b",
+      "name": "Merge"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "RSS Cointelegraph": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "RSS Decrypt": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "RSS Bitcoin Magazine": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 2
+          }
+        ]
+      ]
+    },
+    "RSS CoinDesk": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 3
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "735d57a2-13bc-43cf-8945-84eb6a807b65",
+  "meta": {
+    "instanceId": "4291e928c9bb5c38fda6eb33170b3dd8560c49ca88920757d2ed40a8bbd22803"
+  },
+  "id": "wxyBciHrBiqxFECU",
+  "tags": []
+}

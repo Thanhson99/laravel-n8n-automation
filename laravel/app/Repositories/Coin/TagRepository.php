@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Repositories\Eloquent;
+namespace App\Repositories\Coin;
 
 use App\Models\Tag;
 use App\Repositories\BaseRepository;
@@ -85,5 +85,28 @@ class TagRepository extends BaseRepository implements TagRepositoryInterface
         $tag = $this->find($id);
 
         return $tag ? $tag->delete() : false;
+    }
+
+    /**
+     * Get existing tags by name or create them if not exist.
+     *
+     * @param array<string> $tagNames  List of tag names.
+     * @return array<int> List of tag IDs.
+     */
+    public function getOrCreateTags(array $tagNames): array
+    {
+        $tagIds = [];
+
+        foreach ($tagNames as $name) {
+            $tag = $this->findByName($name);
+
+            if (!$tag) {
+                $tag = $this->create(['name' => $name]);
+            }
+
+            $tagIds[] = $tag->id;
+        }
+
+        return $tagIds;
     }
 }

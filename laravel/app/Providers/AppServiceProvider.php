@@ -9,7 +9,7 @@ use App\Repositories\Coin\Interfaces\FavoriteCoinRepositoryInterface;
 use App\Repositories\Coin\FeedKeywordRepository;
 use App\Repositories\Coin\Interfaces\FeedKeywordRepositoryInterface;
 use App\Repositories\Coin\Interfaces\TagRepositoryInterface;
-use App\Repositories\Eloquent\TagRepository;
+use App\Repositories\Coin\TagRepository;
 use App\Services\Coin\BinanceCoinApiClient;
 use App\Services\Coin\CoinApiClientInterface;
 use App\Services\Coin\CoinServiceFactory;

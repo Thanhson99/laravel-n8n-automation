@@ -38,6 +38,7 @@
     </script>
 
     @stack('page_js')
+    @stack('scripts')
 
     @vite(['resources/js/app.js'])
 @endsection
