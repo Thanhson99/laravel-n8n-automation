@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('title', 'Create Feed Keyword')
+@section('page_id', 'keywords')
 
 @section('content_header')
     <h1>Create Feed Keyword</h1>
@@ -53,7 +54,8 @@
             </div>
         </div>
 
-        {{-- Hidden inputs for tags will be injected here --}}
+        {{-- Hidden inputs will be appended here (must be inside form!) --}}
+        <div id="hiddenTagInputs"></div>
     </form>
 
     <hr>
@@ -64,7 +66,3 @@
     </div>
 </div>
 @endsection
-
-@push('scripts')
-    <script src="{{ asset('js/pages/keywords-create.js') }}"></script>
-@endpush

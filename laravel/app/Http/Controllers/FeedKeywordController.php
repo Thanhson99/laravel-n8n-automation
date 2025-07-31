@@ -48,7 +48,7 @@ class FeedKeywordController extends Controller
      * @return RedirectResponse
      */
     public function store(StoreFeedKeywordRequest $request): RedirectResponse
-    {dd($request->all());
+    {
         try {
             $this->keywordService->create($request->validated());
     

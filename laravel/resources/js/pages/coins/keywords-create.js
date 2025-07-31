@@ -1,57 +1,87 @@
-/**
- * Handle keyword + optional tags input to send via hidden inputs.
- * - Displays tags as removable blocks
- * - Preserves data via <input type="hidden" name="tags[]">
- *
- * Requires: jQuery + Bootstrap 5
- */
 $(function () {
-    const $form = $('#keywordForm');
-    const $tagInput = $('#tagInput');
-    const $keywordList = $('#keywordList');
+    const form = $('#keywordForm');
+    const tagInput = $('#tagInput');
+    const keywordInput = $('#keyword');
+    const keywordList = $('#keywordList');
+    const hiddenInputContainer = $('#hiddenTagInputs');
+
+    let keywordTagId = null;
 
     /**
-     * Create a tag block with a hidden input
-     * @param {string} tag
+     * Add a new tag to list and hidden inputs
+     * @param {string} tag - Tag text
+     * @param {boolean} isKeyword - If this is the main keyword
      */
-    function addTag(tag) {
+    function addTag(tag, isKeyword = false) {
         const tagId = 'tag-' + Date.now();
 
-        const $block = $(`
-            <div class="badge bg-primary text-white me-2 mb-2 p-2 rounded-pill d-inline-flex align-items-center" id="${tagId}">
-                <span>#${tag}</span>
-                <button type="button" class="btn-close btn-close-white btn-sm ms-2 remove-tag" data-tag-id="${tagId}" aria-label="Remove"></button>
+        const tagClass = isKeyword ? 'bg-dark' : 'bg-primary';
+        const label = isKeyword ? tag : `#${tag}`;
+
+        const tagBlock = $(`
+            <div class="badge ${tagClass} text-white me-2 mb-2 px-3 py-2 rounded-pill d-inline-flex align-items-center fs-6" id="${tagId}">
+                <button type="button" class="btn btn-sm text-white fw-bold px-1 py-0 me-2 remove-tag" data-tag-id="${tagId}" style="font-size: 1.2rem;">×</button>
+                <span>${label}</span>
             </div>
         `);
 
-        const $hiddenInput = $(`<input type="hidden" name="tags[]" value="${tag}" data-tag-id="${tagId}">`);
+        const hiddenInput = $(`<input type="hidden" name="tags[]" value="${tag}" data-tag-id="${tagId}">`);
 
-        $keywordList.append($block);
-        $form.append($hiddenInput);
+        keywordList.prepend(tagBlock);
+        hiddenInputContainer.prepend(hiddenInput);
+
+        if (isKeyword) {
+            keywordTagId = tagId;
+        }
     }
 
     /**
-     * Handle Enter on tag input to add tag block
+     * Handle form submit: insert keyword if not in tags
      */
-    $tagInput.on('keypress', function (e) {
-        if (e.which === 13) {
+    form.on('submit', function (e) {
+        e.preventDefault();
+
+        const pendingTag = tagInput.val().trim();
+        if (pendingTag) {
+            addTag(pendingTag);
+            tagInput.val('');
+        }
+
+        const keyword = keywordInput.val().trim();
+        const exists = hiddenInputContainer.find(`input[name="tags[]"][value="${keyword}"]`).length > 0;
+
+        if (keyword && !exists) {
+            addTag(keyword, true);
+        }
+
+        this.submit();
+    });
+
+    /**
+     * Handle Enter key in tag input
+     */
+    tagInput.on('keydown', function (e) {
+        if (e.key === 'Enter') {
             e.preventDefault();
-            const tag = $tagInput.val().trim();
+            const tag = tagInput.val().trim();
             if (tag) {
                 addTag(tag);
-                $tagInput.val('');
+                tagInput.val('');
             }
         }
     });
 
     /**
-     * Remove tag block + hidden input
+     * Remove tag
      */
     $(document).on('click', '.remove-tag', function () {
         const tagId = $(this).data('tag-id');
-        if (confirm('Remove this tag?')) {
-            $('#' + tagId).remove();
-            $('input[data-tag-id="' + tagId + '"]').remove();
+        $('#' + tagId).remove();
+        $(`input[data-tag-id="${tagId}"]`).remove();
+
+        // Reset
+        if (tagId === keywordTagId) {
+            keywordTagId = null;
         }
     });
 });
