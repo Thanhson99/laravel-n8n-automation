@@ -7,6 +7,7 @@ namespace App\Repositories\Coin;
 use App\Models\FeedKeyword;
 use App\Repositories\BaseRepository;
 use App\Repositories\Coin\Interfaces\FeedKeywordRepositoryInterface;
+use Illuminate\Support\Collection;
 
 /**
  * Class FeedKeywordRepository
@@ -31,7 +32,6 @@ class FeedKeywordRepository extends BaseRepository implements FeedKeywordReposit
      * Find a feed keyword by its ID, including associated tags.
      *
      * @param  int  $id  Feed keyword ID.
-     * @return FeedKeyword|null
      */
     public function find(int $id): ?FeedKeyword
     {
@@ -42,7 +42,6 @@ class FeedKeywordRepository extends BaseRepository implements FeedKeywordReposit
      * Find a feed keyword by its keyword string.
      *
      * @param  string  $keyword  The keyword string.
-     * @return FeedKeyword|null
      */
     public function findByKeyword(string $keyword): ?FeedKeyword
     {
@@ -52,9 +51,8 @@ class FeedKeywordRepository extends BaseRepository implements FeedKeywordReposit
     /**
      * Sync tags to a specific feed keyword.
      *
-     * @param  int         $keywordId  Feed keyword ID.
-     * @param  array<int>  $tagIds     List of tag IDs.
-     * @return void
+     * @param  int  $keywordId  Feed keyword ID.
+     * @param  array<int>  $tagIds  List of tag IDs.
      */
     public function syncTags(int $keywordId, array $tagIds): void
     {
@@ -69,7 +67,6 @@ class FeedKeywordRepository extends BaseRepository implements FeedKeywordReposit
      * Create a new feed keyword.
      *
      * @param  array<string, mixed>  $data  Keyword data.
-     * @return FeedKeyword
      */
     public function create(array $data): FeedKeyword
     {
@@ -79,9 +76,9 @@ class FeedKeywordRepository extends BaseRepository implements FeedKeywordReposit
     /**
      * Update a feed keyword by ID.
      *
-     * @param  int                   $id    Feed keyword ID.
-     * @param  array<string, mixed> $data  Updated keyword data.
-     * @return bool  True on success.
+     * @param  int  $id  Feed keyword ID.
+     * @param  array<string, mixed>  $data  Updated keyword data.
+     * @return bool True on success.
      */
     public function update(int $id, array $data): bool
     {
@@ -94,22 +91,36 @@ class FeedKeywordRepository extends BaseRepository implements FeedKeywordReposit
      * Delete a feed keyword by ID.
      *
      * @param  int  $id  Feed keyword ID.
-     * @return bool  True on success.
+     * @return bool True on success.
      */
     public function delete(int $id): bool
     {
         $keyword = $this->find($id);
 
-        return $keyword ? $keyword->delete() : false;
+        return (bool) ($keyword?->delete());
     }
 
     /**
      * Get all feed keywords with tags.
      *
-     * @return \Illuminate\Database\Eloquent\Collection
+     * @return Collection<int, FeedKeyword>
      */
-    public function allWithTags()
+    public function allWithTags(): Collection
     {
         return $this->model->newQuery()->with('tags')->latest()->get();
+    }
+
+    /**
+     * Delete a feed keyword and detach all related tags.
+     *
+     * @param  int  $id  Feed keyword ID.
+     */
+    public function deleteWithTags(int $id): void
+    {
+        $keyword = $this->model->newQuery()->with('tags')->findOrFail($id);
+
+        $keyword->tags()->detach();
+
+        $keyword->delete();
     }
 }

@@ -10,8 +10,6 @@ class StoreFeedKeywordRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
-     *
-     * @return bool
      */
     public function authorize(): bool
     {
@@ -27,8 +25,8 @@ class StoreFeedKeywordRequest extends FormRequest
     {
         return [
             'keyword' => 'required|string|max:255',
-            'tags'    => 'nullable|array',
-            'tags.*'  => 'string|max:100',
+            'tags' => 'nullable|array',
+            'tags.*' => 'string|max:100',
         ];
     }
 }

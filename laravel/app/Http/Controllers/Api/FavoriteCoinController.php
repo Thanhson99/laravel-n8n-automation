@@ -25,7 +25,16 @@ class FavoriteCoinController extends Controller
      */
     public function favoritesToggle(Request $request): JsonResponse
     {
-        $symbol = strtoupper($request->input('symbol'));
+        $symbol = $request->input('symbol');
+
+        if (! is_string($symbol)) {
+            return response()->json([
+                'message' => 'Invalid symbol format',
+                'success' => false,
+            ], 400);
+        }
+
+        $symbol = strtoupper($symbol);
 
         // Validate symbol format (3-10 uppercase letters or numbers)
         if (! preg_match('/^[A-Z0-9]{3,10}$/', $symbol)) {

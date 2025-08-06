@@ -27,6 +27,7 @@ Route::prefix('coins/feed-keywords')
     ->group(function () {
         Route::get('/', 'index')->name('index');                    // Show keyword
         Route::post('store', 'store')->name('store');               // Handle keyword creation
+        Route::post('destroy', 'destroy')->name('destroy');         // Handle keyword destroy
     });
 
 // Favorite toggle route (used via AJAX from Blade)

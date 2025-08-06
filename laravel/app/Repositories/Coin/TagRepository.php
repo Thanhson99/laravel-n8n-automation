@@ -31,7 +31,6 @@ class TagRepository extends BaseRepository implements TagRepositoryInterface
      * Find a tag by its ID.
      *
      * @param  int  $id  Tag ID.
-     * @return Tag|null
      */
     public function find(int $id): ?Tag
     {
@@ -42,7 +41,6 @@ class TagRepository extends BaseRepository implements TagRepositoryInterface
      * Find a tag by its name.
      *
      * @param  string  $name  Tag name.
-     * @return Tag|null
      */
     public function findByName(string $name): ?Tag
     {
@@ -53,7 +51,6 @@ class TagRepository extends BaseRepository implements TagRepositoryInterface
      * Create a new tag.
      *
      * @param  array<string, mixed>  $data  Tag data.
-     * @return Tag
      */
     public function create(array $data): Tag
     {
@@ -84,13 +81,13 @@ class TagRepository extends BaseRepository implements TagRepositoryInterface
     {
         $tag = $this->find($id);
 
-        return $tag ? $tag->delete() : false;
+        return (bool) ($tag?->delete());
     }
 
     /**
      * Get existing tags by name or create them if not exist.
      *
-     * @param array<string> $tagNames  List of tag names.
+     * @param  array<string>  $tagNames  List of tag names.
      * @return array<int> List of tag IDs.
      */
     public function getOrCreateTags(array $tagNames): array
@@ -100,7 +97,7 @@ class TagRepository extends BaseRepository implements TagRepositoryInterface
         foreach ($tagNames as $name) {
             $tag = $this->findByName($name);
 
-            if (!$tag) {
+            if (! $tag) {
                 $tag = $this->create(['name' => $name]);
             }
 

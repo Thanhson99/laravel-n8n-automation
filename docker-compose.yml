@@ -38,6 +38,8 @@ services:
   n8n:
     image: n8nio/n8n
     container_name: n8n
+    ports:
+      - 5678:5678
     volumes:
       - ./n8n:/home/node/.n8n
     env_file:
@@ -62,7 +64,7 @@ services:
     container_name: nginx
     ports:
       - "8881:8881"  # Laravel
-      - "8882:8882"  # n8n
+      # - "8882:8882"  # n8n
       - "8883:8883"  # LibreTranslate
     volumes:
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro

@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace App\Repositories\Coin;
 
 use App\Models\FavoriteCoin;
-use App\Repositories\Coin\Interfaces\FavoriteCoinRepositoryInterface;
 use App\Repositories\BaseRepository;
+use App\Repositories\Coin\Interfaces\FavoriteCoinRepositoryInterface;
 
 /**
  * Class FavoriteCoinRepository
@@ -32,7 +32,12 @@ class FavoriteCoinRepository extends BaseRepository implements FavoriteCoinRepos
      */
     public function getAllSymbols(): array
     {
-        return $this->model->newQuery()->pluck('symbol')->toArray();
+        return $this->model
+            ->newQuery()
+            ->pluck('symbol')
+            ->filter(fn ($value) => is_string($value))
+            ->values()
+            ->all();
     }
 
     /**

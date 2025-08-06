@@ -20,7 +20,7 @@ return new class extends Migration
             $table->unsignedBigInteger('feed_keyword_id');
             $table->unsignedBigInteger('tag_id');
             $table->timestamps();
-        
+
             $table->primary(['feed_keyword_id', 'tag_id']);
         });
     }

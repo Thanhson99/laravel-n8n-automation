@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace App\Providers;
 
 use App\Repositories\Coin\FavoriteCoinRepository;
-use App\Repositories\Coin\Interfaces\FavoriteCoinRepositoryInterface;
 use App\Repositories\Coin\FeedKeywordRepository;
+use App\Repositories\Coin\Interfaces\FavoriteCoinRepositoryInterface;
 use App\Repositories\Coin\Interfaces\FeedKeywordRepositoryInterface;
 use App\Repositories\Coin\Interfaces\TagRepositoryInterface;
 use App\Repositories\Coin\TagRepository;
@@ -27,8 +27,6 @@ class AppServiceProvider extends ServiceProvider
 {
     /**
      * Register all application service bindings.
-     *
-     * @return void
      */
     public function register(): void
     {
@@ -48,7 +46,8 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(
             \App\Services\Coin\CoinServiceInterface::class,
             function () {
-                $source = Request::get('source', 'binance');
+                $rawSource = Request::get('source');
+                $source = is_string($rawSource) ? $rawSource : 'binance';
 
                 return CoinServiceFactory::make($source);
             }
@@ -57,8 +56,6 @@ class AppServiceProvider extends ServiceProvider
 
     /**
      * Bootstrap application services.
-     *
-     * @return void
      */
     public function boot(): void
     {

@@ -1,0 +1,638 @@
+[
+    {
+        "keyword": "Breaking News",
+        "type": "other",
+        "tags": [
+            "breaking",
+            "headline",
+            "urgent"
+        ]
+    },
+    {
+        "keyword": "Exclusive Report",
+        "type": "coin",
+        "tags": [
+            "exclusive_report"
+        ]
+    },
+    {
+        "keyword": "Hot",
+        "type": "scam",
+        "tags": [
+            "hot"
+        ]
+    },
+    {
+        "keyword": "Urgent",
+        "type": "coin",
+        "tags": [
+            "urgent"
+        ]
+    },
+    {
+        "keyword": "Shock",
+        "type": "hack",
+        "tags": [
+            "shock"
+        ]
+    },
+    {
+        "keyword": "Latest",
+        "type": "etf",
+        "tags": [
+            "latest"
+        ]
+    },
+    {
+        "keyword": "Insider Info",
+        "type": "coin",
+        "tags": [
+            "insider_info"
+        ]
+    },
+    {
+        "keyword": "Revealed",
+        "type": "scam",
+        "tags": [
+            "revealed"
+        ]
+    },
+    {
+        "keyword": "Just In",
+        "type": "other",
+        "tags": [
+            "just_in"
+        ]
+    },
+    {
+        "keyword": "Bitcoin",
+        "type": "etf",
+        "tags": [
+            "btc",
+            "bitcoin",
+            "layer1"
+        ]
+    },
+    {
+        "keyword": "Ethereum",
+        "type": "other",
+        "tags": [
+            "eth",
+            "smart contract",
+            "erc20"
+        ]
+    },
+    {
+        "keyword": "Solana",
+        "type": "scam",
+        "tags": [
+            "solana"
+        ]
+    },
+    {
+        "keyword": "Ripple",
+        "type": "other",
+        "tags": [
+            "ripple"
+        ]
+    },
+    {
+        "keyword": "Cardano",
+        "type": "scam",
+        "tags": [
+            "cardano"
+        ]
+    },
+    {
+        "keyword": "Polkadot",
+        "type": "etf",
+        "tags": [
+            "polkadot"
+        ]
+    },
+    {
+        "keyword": "Dogecoin",
+        "type": "coin",
+        "tags": [
+            "dogecoin"
+        ]
+    },
+    {
+        "keyword": "Shiba Inu",
+        "type": "coin",
+        "tags": [
+            "shiba_inu"
+        ]
+    },
+    {
+        "keyword": "Avalanche",
+        "type": "etf",
+        "tags": [
+            "avalanche"
+        ]
+    },
+    {
+        "keyword": "Polygon",
+        "type": "etf",
+        "tags": [
+            "polygon"
+        ]
+    },
+    {
+        "keyword": "Chainlink",
+        "type": "hack",
+        "tags": [
+            "chainlink"
+        ]
+    },
+    {
+        "keyword": "Toncoin",
+        "type": "scam",
+        "tags": [
+            "toncoin"
+        ]
+    },
+    {
+        "keyword": "StarkNet",
+        "type": "etf",
+        "tags": [
+            "starknet"
+        ]
+    },
+    {
+        "keyword": "Arbitrum",
+        "type": "other",
+        "tags": [
+            "arbitrum"
+        ]
+    },
+    {
+        "keyword": "Optimism",
+        "type": "other",
+        "tags": [
+            "optimism"
+        ]
+    },
+    {
+        "keyword": "Injective",
+        "type": "etf",
+        "tags": [
+            "injective"
+        ]
+    },
+    {
+        "keyword": "Sui",
+        "type": "hack",
+        "tags": [
+            "sui"
+        ]
+    },
+    {
+        "keyword": "Aptos",
+        "type": "hack",
+        "tags": [
+            "aptos"
+        ]
+    },
+    {
+        "keyword": "Kaspa",
+        "type": "etf",
+        "tags": [
+            "kaspa"
+        ]
+    },
+    {
+        "keyword": "Near Protocol",
+        "type": "scam",
+        "tags": [
+            "near_protocol"
+        ]
+    },
+    {
+        "keyword": "Rug Pull",
+        "type": "etf",
+        "tags": [
+            "scam",
+            "rugpull",
+            "exit"
+        ]
+    },
+    {
+        "keyword": "Exit Scam",
+        "type": "hack",
+        "tags": [
+            "exit_scam"
+        ]
+    },
+    {
+        "keyword": "Flash Loan Attack",
+        "type": "coin",
+        "tags": [
+            "exploit",
+            "flashloan",
+            "hack"
+        ]
+    },
+    {
+        "keyword": "Binance Hack",
+        "type": "scam",
+        "tags": [
+            "binance_hack"
+        ]
+    },
+    {
+        "keyword": "Exchange Breach",
+        "type": "scam",
+        "tags": [
+            "exchange_breach"
+        ]
+    },
+    {
+        "keyword": "Phishing",
+        "type": "hack",
+        "tags": [
+            "phishing"
+        ]
+    },
+    {
+        "keyword": "Fake Airdrop",
+        "type": "hack",
+        "tags": [
+            "fake_airdrop"
+        ]
+    },
+    {
+        "keyword": "Social Engineering",
+        "type": "etf",
+        "tags": [
+            "social_engineering"
+        ]
+    },
+    {
+        "keyword": "Wallet Drain",
+        "type": "etf",
+        "tags": [
+            "wallet_drain"
+        ]
+    },
+    {
+        "keyword": "Bridge Exploit",
+        "type": "coin",
+        "tags": [
+            "bridge_exploit"
+        ]
+    },
+    {
+        "keyword": "Smart Contract Bug",
+        "type": "etf",
+        "tags": [
+            "smart_contract_bug"
+        ]
+    },
+    {
+        "keyword": "Private Key Leak",
+        "type": "scam",
+        "tags": [
+            "private_key_leak"
+        ]
+    },
+    {
+        "keyword": "BlackRock ETF",
+        "type": "hack",
+        "tags": [
+            "etf",
+            "institution",
+            "blackrock"
+        ]
+    },
+    {
+        "keyword": "Grayscale Trust",
+        "type": "other",
+        "tags": [
+            "grayscale_trust"
+        ]
+    },
+    {
+        "keyword": "Spot ETF Approval",
+        "type": "scam",
+        "tags": [
+            "spot_etf_approval"
+        ]
+    },
+    {
+        "keyword": "SEC Lawsuit",
+        "type": "etf",
+        "tags": [
+            "sec_lawsuit"
+        ]
+    },
+    {
+        "keyword": "ARK Invest Filing",
+        "type": "scam",
+        "tags": [
+            "ark_invest_filing"
+        ]
+    },
+    {
+        "keyword": "Institutional Buy",
+        "type": "other",
+        "tags": [
+            "institutional_buy"
+        ]
+    },
+    {
+        "keyword": "ETF Launch",
+        "type": "other",
+        "tags": [
+            "etf_launch"
+        ]
+    },
+    {
+        "keyword": "Fidelity ETF",
+        "type": "hack",
+        "tags": [
+            "fidelity_etf"
+        ]
+    },
+    {
+        "keyword": "VanEck",
+        "type": "coin",
+        "tags": [
+            "vaneck"
+        ]
+    },
+    {
+        "keyword": "Goldman Sachs Crypto",
+        "type": "coin",
+        "tags": [
+            "goldman_sachs_crypto"
+        ]
+    },
+    {
+        "keyword": "Crypto Crash",
+        "type": "other",
+        "tags": [
+            "crash",
+            "downtrend",
+            "market"
+        ]
+    },
+    {
+        "keyword": "Crypto Rally",
+        "type": "scam",
+        "tags": [
+            "crypto_rally"
+        ]
+    },
+    {
+        "keyword": "Bear Trap",
+        "type": "scam",
+        "tags": [
+            "bear_trap"
+        ]
+    },
+    {
+        "keyword": "Bull Run",
+        "type": "etf",
+        "tags": [
+            "bull_run"
+        ]
+    },
+    {
+        "keyword": "Halving",
+        "type": "scam",
+        "tags": [
+            "halving",
+            "bitcoin",
+            "reward"
+        ]
+    },
+    {
+        "keyword": "Rate Hike",
+        "type": "etf",
+        "tags": [
+            "rate_hike"
+        ]
+    },
+    {
+        "keyword": "FOMC Meeting",
+        "type": "other",
+        "tags": [
+            "fomc_meeting"
+        ]
+    },
+    {
+        "keyword": "Recession Fears",
+        "type": "other",
+        "tags": [
+            "recession_fears"
+        ]
+    },
+    {
+        "keyword": "Whale Movement",
+        "type": "coin",
+        "tags": [
+            "whale",
+            "transfer",
+            "on-chain"
+        ]
+    },
+    {
+        "keyword": "Mass Liquidation",
+        "type": "hack",
+        "tags": [
+            "mass_liquidation"
+        ]
+    },
+    {
+        "keyword": "Panic Sell",
+        "type": "other",
+        "tags": [
+            "panic_sell"
+        ]
+    },
+    {
+        "keyword": "Fear Index",
+        "type": "other",
+        "tags": [
+            "fear_index"
+        ]
+    },
+    {
+        "keyword": "Greed Index",
+        "type": "etf",
+        "tags": [
+            "greed_index"
+        ]
+    },
+    {
+        "keyword": "Volatility Spike",
+        "type": "hack",
+        "tags": [
+            "volatility_spike"
+        ]
+    },
+    {
+        "keyword": "NFT Boom",
+        "type": "scam",
+        "tags": [
+            "nft",
+            "trend",
+            "collectibles"
+        ]
+    },
+    {
+        "keyword": "Metaverse Trend",
+        "type": "hack",
+        "tags": [
+            "metaverse_trend"
+        ]
+    },
+    {
+        "keyword": "Play to Earn",
+        "type": "other",
+        "tags": [
+            "play_to_earn"
+        ]
+    },
+    {
+        "keyword": "Move to Earn",
+        "type": "scam",
+        "tags": [
+            "move_to_earn"
+        ]
+    },
+    {
+        "keyword": "DeFi Protocol",
+        "type": "hack",
+        "tags": [
+            "defi_protocol"
+        ]
+    },
+    {
+        "keyword": "AI Crypto",
+        "type": "other",
+        "tags": [
+            "ai_crypto"
+        ]
+    },
+    {
+        "keyword": "Web3 Startup",
+        "type": "hack",
+        "tags": [
+            "web3_startup"
+        ]
+    },
+    {
+        "keyword": "Tornado Cash",
+        "type": "etf",
+        "tags": [
+            "tornado_cash"
+        ]
+    },
+    {
+        "keyword": "CBDC",
+        "type": "hack",
+        "tags": [
+            "cbdc"
+        ]
+    },
+    {
+        "keyword": "KYC Rule",
+        "type": "etf",
+        "tags": [
+            "kyc_rule"
+        ]
+    },
+    {
+        "keyword": "Wallet Regulation",
+        "type": "hack",
+        "tags": [
+            "wallet_regulation"
+        ]
+    },
+    {
+        "keyword": "DEX Growth",
+        "type": "etf",
+        "tags": [
+            "dex_growth"
+        ]
+    },
+    {
+        "keyword": "DEX Volume Surge",
+        "type": "hack",
+        "tags": [
+            "dex_volume_surge"
+        ]
+    },
+    {
+        "keyword": "Stablecoin Depeg",
+        "type": "hack",
+        "tags": [
+            "stablecoin_depeg"
+        ]
+    },
+    {
+        "keyword": "Layer 2 Adoption",
+        "type": "scam",
+        "tags": [
+            "layer_2_adoption"
+        ]
+    },
+    {
+        "keyword": "Gas Fee Spike",
+        "type": "coin",
+        "tags": [
+            "gas_fee_spike"
+        ]
+    },
+    {
+        "keyword": "Token Burn",
+        "type": "etf",
+        "tags": [
+            "token_burn"
+        ]
+    },
+    {
+        "keyword": "Token Unlock",
+        "type": "scam",
+        "tags": [
+            "token_unlock"
+        ]
+    },
+    {
+        "keyword": "Vesting Schedule",
+        "type": "hack",
+        "tags": [
+            "vesting_schedule"
+        ]
+    },
+    {
+        "keyword": "Airdrop Claim",
+        "type": "scam",
+        "tags": [
+            "airdrop_claim"
+        ]
+    },
+    {
+        "keyword": "mega whales",
+        "type": "coin",
+        "tags": [
+            "whales"
+        ]
+    },
+    {
+        "keyword": "ether",
+        "type": "coin",
+        "tags": [
+            "eth"
+        ]
+    },
+    {
+        "keyword": "cryptocurrency",
+        "type": "coin",
+        "tags": [
+            "crypto"
+        ]
+    }
+]

@@ -1,13 +1,32 @@
+includes:
+    # Include Larastan extension for Laravel-specific analysis
+    - ./vendor/nunomaduro/larastan/extension.neon
+
 parameters:
-  level: 8
+    # Use the strictest level
+    level: max
 
-  paths:
-    - app
-    - routes
+    # Directories to analyse
+    paths:
+        - app
+        - routes
 
-  excludePaths:
-    - tests/*
-    - database/*
-    - bootstrap/*
-    - storage/*
-    - vendor/*
+    # Exclude unnecessary paths
+    excludePaths:
+        - tests/*
+        - database/*
+        - bootstrap/*
+        - storage/*
+        - vendor/*
+
+    # Additional strict rules (only those supported)
+    checkMissingCallableSignature: true
+    checkExplicitMixed: true
+    checkUninitializedProperties: true
+    inferPrivatePropertyTypeFromConstructor: true
+    treatPhpDocTypesAsCertain: true
+    reportUnmatchedIgnoredErrors: false
+
+    # Ignore known Eloquent-related issues
+    ignoreErrors:
+    - '#Method App\\Models\\.*::.*\(\) should return Illuminate\\Database\\Eloquent\\Relations\\BelongsToMany<.*> but returns Illuminate\\Database\\Eloquent\\Relations\\BelongsToMany<.*>#'

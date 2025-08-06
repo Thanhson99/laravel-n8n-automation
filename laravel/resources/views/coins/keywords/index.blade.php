@@ -20,7 +20,7 @@
     <form method="POST" action="{{ route('coins.feed-keywords.store') }}" id="keywordForm">
         @csrf
 
-        {{-- Keyword --}}
+        <!-- Keyword -->
         <div class="mb-3">
             <label for="keyword" class="form-label">Keyword</label>
             <input
@@ -36,7 +36,7 @@
             @enderror
         </div>
 
-        {{-- Tags --}}
+        <!-- Tags -->
         <div class="mb-3">
             <label class="form-label">Tags</label>
             <div class="row gx-2">
@@ -54,15 +54,31 @@
             </div>
         </div>
 
-        {{-- Hidden inputs will be appended here (must be inside form!) --}}
+        <!-- Hidden inputs will be appended here (must be inside form!) -->
         <div id="hiddenTagInputs"></div>
     </form>
 
     <hr>
 
-    {{-- Tag preview --}}
-    <div id="keywordList" class="mt-4">
-        {{-- JS will append tag blocks here --}}
-    </div>
+    <!-- Tag preview -->
+    <ul class="list-group mt-4">
+        @forelse($keywords as $item)
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                <div>
+                    {{ $item->keyword }}
+                    @foreach ($item->tags as $tag)
+                        <span class="badge bg-primary ms-1">#{{ $tag->name }}</span>
+                    @endforeach
+                </div>
+                <form action="{{ route('coins.feed-keywords.destroy', $item->id) }}" method="POST" onsubmit="return confirm('Delete this keyword?')">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="btn btn-sm">❌</button>
+                </form>
+            </li>
+        @empty
+            <li class="list-group-item">No keyword found.</li>
+        @endforelse
+    </ul>
 </div>
 @endsection

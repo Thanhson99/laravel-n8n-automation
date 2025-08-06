@@ -27,7 +27,7 @@ class Tag extends Model
     /**
      * The attributes that are mass assignable.
      *
-     * @var array<int, string>
+     * @var list<string>
      */
     protected $fillable = [
         'name',
@@ -36,10 +36,20 @@ class Tag extends Model
     /**
      * Get all feed keywords associated with this tag.
      *
-     * @return BelongsToMany
+     * @return BelongsToMany<FeedKeyword>
+     *
+     * @phpstan-return BelongsToMany<
+     *     \App\Models\FeedKeyword,
+     *     \App\Models\Tag
+     * >
      */
     public function keywords(): BelongsToMany
     {
-        return $this->belongsToMany(FeedKeyword::class, 'feed_keyword_tag', 'tag_id', 'feed_keyword_id');
+        return $this->belongsToMany(
+            FeedKeyword::class,
+            'feed_keyword_tag',
+            'tag_id',
+            'feed_keyword_id'
+        );
     }
 }

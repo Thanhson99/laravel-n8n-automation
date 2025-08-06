@@ -15,7 +15,7 @@ return new class extends Migration
             // If the table already exists, we can skip creating it
             return;
         }
-        
+
         Schema::create('feed_keywords', function (Blueprint $table) {
             $table->id();
             $table->string('keyword')->unique();
