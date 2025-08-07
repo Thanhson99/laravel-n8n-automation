@@ -1,10 +1,11 @@
 @extends('layouts.app')
 
-@section('title', 'Top Coins')
-
 @push('meta')
     <meta name="toggle-favorite-url" content="{{ route('favorites.toggle') }}">
 @endpush
+
+@section('title', 'Top Coins')
+@section('page_id', 'coins-favorites')
 
 @section('content_header')
     <h1>Top Coins (Source: {{ ucfirst($source) }})</h1>

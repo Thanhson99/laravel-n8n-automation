@@ -77,7 +77,7 @@ jobs:
 
       - name: 🧠 Run PHPStan (static analysis)
         working-directory: ./laravel
-        run: vendor/bin/phpstan analyse --no-progress --configuration=phpstan.neon
+        run: vendor/bin/phpstan analyse --memory-limit=-1 --no-progress --configuration=phpstan.neon
 
       - name: 🧪 Run tests
         working-directory: ./laravel
