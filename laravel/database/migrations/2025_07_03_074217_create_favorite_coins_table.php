@@ -13,9 +13,17 @@ return new class extends Migration
      */
     public function up(): void
     {
+        if (Schema::hasTable('favorite_coins')) {
+            // If the table already exists, we can skip creating it
+            return;
+        }
+
         Schema::create('favorite_coins', function (Blueprint $table) {
             $table->id();
             $table->string('symbol')->index();
+            $table->decimal('last_price', 18, 8)
+                ->nullable()
+                ->comment('Most recent price of the coin');
             $table->timestamps();
         });
     }
