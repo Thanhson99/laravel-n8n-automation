@@ -16,15 +16,24 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     try {
         switch (page) {
-            // coins-favorites → ./pages/coins/coin-favorites-table.js → Handles favorites table display and logic
+            // coins-favorites → ./pages/coins/favorites/coin-favorites-table.js
+            // Handles favorites table display and logic
             case 'coins-favorites':
-                await import('./pages/coins/coin-favorites-table.js');
+                await import('./pages/coins/favorites/coin-favorites-table.js');
                 break;
 
-            // keywords → ./pages/coins/keywords-create.js → Handles keyword creation form with dynamic tag input
-            case 'keywords':
-                await import('./pages/coins/keywords-create.js');
+            // Coin-alert-settings → ./pages/coins/alert-settings/coin-alert-settings-table.js
+            // Manages coin alert settings table: edit, toggle on/off
+            case 'coin-alert-settings':
+                await import('./pages/coins/alert-settings/coin-alert-settings-table.js');
                 break;
+
+            // keywords → ./pages/coins/keywords/keywords-create.js
+            // Handles keyword creation form with dynamic tag input
+            case 'keywords':
+                await import('./pages/coins/keywords/keywords-create.js');
+                break;
+            
 
             // Add more pages below using the same pattern
             // example-page → ./pages/example/example-page.js → Description

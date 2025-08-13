@@ -310,7 +310,11 @@ return [
                     'route' => 'coins.index',
                 ],
                 [
-                    'text' => 'Add Feed Keyword',
+                    'text' => 'Price Alert Settings',
+                    'route' => 'coins.price-alert-settings.index',
+                ],
+                [
+                    'text' => 'Feed Keyword',
                     'route' => 'coins.feed-keywords.index',
                 ],
             ],

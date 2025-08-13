@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\FavoriteCoinController;
+use App\Http\Controllers\CoinAlertSettingsController;
 use App\Http\Controllers\CoinController;
 use App\Http\Controllers\FeedKeywordController;
 use Illuminate\Support\Facades\Route;
@@ -16,8 +17,8 @@ Route::view('/', 'welcome');
 
 // Coin routes
 Route::prefix('coins')->name('coins.')->controller(CoinController::class)->group(function () {
-    Route::get('/', 'index')->name('index');                        // List top coins
-    Route::get('show/{symbol}', 'show')->name('show');              // Show coin detail
+    Route::get('/', 'index')->name('index');                            // List top coins
+    Route::get('show/{symbol}', 'show')->name('show');                  // Show coin detail
 });
 
 // Feed keyword routes (under coins namespace)
@@ -25,9 +26,20 @@ Route::prefix('coins/feed-keywords')
     ->name('coins.feed-keywords.')
     ->controller(FeedKeywordController::class)
     ->group(function () {
-        Route::get('/', 'index')->name('index');                    // Show keyword
-        Route::post('store', 'store')->name('store');               // Handle keyword creation
-        Route::post('destroy', 'destroy')->name('destroy');         // Handle keyword destroy
+        Route::get('/', 'index')->name('index');                        // Show keyword
+        Route::post('store', 'store')->name('store');                   // Handle keyword creation
+        Route::post('destroy', 'destroy')->name('destroy');             // Handle keyword destroy
+    });
+
+// Price alert routes (under coins namespace)
+Route::prefix('coins/price-alert-settings')
+    ->name('coins.price-alert-settings.')
+    ->controller(CoinAlertSettingsController::class)
+    ->group(function () {
+        Route::get('/', 'index')->name('index');                        // Show all price alert settings
+        Route::get('/{id}/edit', 'edit')->name('edit');                 // Show edit form for a specific alert
+        Route::put('/{id}', 'update')->name('update');                  // Update a specific alert
+        Route::patch('/{id}/toggle', 'toggleStatus')->name('toggle');   // Toggle on/off status for a specific alert
     });
 
 // Favorite toggle route (used via AJAX from Blade)

@@ -1,0 +1,56 @@
+[
+    {
+        "mode": "auto",
+        "type": "preset",
+        "threshold_percent": null,
+        "is_active": true
+    },
+    {
+        "mode": "manual",
+        "type": "preset",
+        "threshold_percent": 1.00,
+        "is_active": true
+    },
+    {
+        "mode": "manual",
+        "type": "preset",
+        "threshold_percent": 2.00,
+        "is_active": true
+    },
+    {
+        "mode": "manual",
+        "type": "preset",
+        "threshold_percent": 3.00,
+        "is_active": false
+    },
+    {
+        "mode": "manual",
+        "type": "preset",
+        "threshold_percent": 5.00,
+        "is_active": true
+    },
+    {
+        "mode": "manual",
+        "type": "preset",
+        "threshold_percent": 7.50,
+        "is_active": false
+    },
+    {
+        "mode": "manual",
+        "type": "preset",
+        "threshold_percent": 10.00,
+        "is_active": true
+    },
+    {
+        "mode": "manual",
+        "type": "preset",
+        "threshold_percent": 15.00,
+        "is_active": false
+    },
+    {
+        "mode": "manual",
+        "type": "preset",
+        "threshold_percent": 20.00,
+        "is_active": false
+    }
+]
