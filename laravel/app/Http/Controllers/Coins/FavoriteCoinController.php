@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Http\Controllers\Api;
+namespace App\Http\Controllers\Coins;
 
 use App\Http\Controllers\Controller;
 use App\Services\Coin\FavoriteCoinServiceInterface;
@@ -12,7 +12,7 @@ use Illuminate\Http\Request;
 /**
  * Class FavoriteCoinController
  *
- * Handles API requests related to user's favorite coins.
+ * Handles requests related to user's favorite coins.
  */
 class FavoriteCoinController extends Controller
 {

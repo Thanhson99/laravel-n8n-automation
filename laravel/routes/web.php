@@ -1,9 +1,10 @@
 <?php
 
-use App\Http\Controllers\Api\FavoriteCoinController;
-use App\Http\Controllers\CoinAlertSettingsController;
-use App\Http\Controllers\CoinController;
-use App\Http\Controllers\FeedKeywordController;
+use App\Http\Controllers\Coins\FavoriteCoinController;
+use App\Http\Controllers\Coins\CoinAlertSettingsController;
+use App\Http\Controllers\Coins\CoinController;
+use App\Http\Controllers\Coins\FeedKeywordController;
+use App\Http\Controllers\VideoAutomation\TrendingVideoController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,32 +16,52 @@ use Illuminate\Support\Facades\Route;
 // Welcome page
 Route::view('/', 'welcome');
 
-// Coin routes
-Route::prefix('coins')->name('coins.')->controller(CoinController::class)->group(function () {
-    Route::get('/', 'index')->name('index');                            // List top coins
-    Route::get('show/{symbol}', 'show')->name('show');                  // Show coin detail
+// Coin module routes (all under 'coins' prefix)
+Route::prefix('coins')->name('coins.')->group(function () {
+
+    // CoinController routes
+    Route::controller(CoinController::class)->group(function () {
+        Route::get('/', 'index')->name('index');            // List top coins
+        Route::get('show/{symbol}', 'show')->name('show');  // Show coin detail
+    });
+
+    // FavoriteCoinController routes
+    Route::controller(FavoriteCoinController::class)->group(function () {
+        Route::post('favorites/toggle', 'favoritesToggle')->name('favorites.toggle'); // AJAX toggle favorite
+    });
+
+    // FeedKeywordController routes
+    Route::prefix('feed-keywords')->name('feed-keywords.')->controller(FeedKeywordController::class)->group(function () {
+        Route::get('/', 'index')->name('index');            // Show keywords
+        Route::post('store', 'store')->name('store');       // Create keyword
+        Route::post('destroy', 'destroy')->name('destroy'); // Delete keyword
+    });
+
+    // CoinAlertSettingsController routes
+    Route::prefix('price-alert-settings')->name('price-alert-settings.')->controller(CoinAlertSettingsController::class)->group(function () {
+        Route::get('/', 'index')->name('index');            // Show all price alert settings
+        Route::get('/{id}/edit', 'edit')->name('edit');     // Show edit form
+        Route::put('/{id}', 'update')->name('update');      // Update alert
+        Route::patch('/{id}/toggle', 'toggleStatus')->name('toggle'); // Toggle on/off
+    });
+
 });
 
-// Feed keyword routes (under coins namespace)
-Route::prefix('coins/feed-keywords')
-    ->name('coins.feed-keywords.')
-    ->controller(FeedKeywordController::class)
+// Video Automation routes
+Route::prefix('video-automation')
+    ->name('video-automation.')
+    ->controller(TrendingVideoController::class)
     ->group(function () {
-        Route::get('/', 'index')->name('index');                        // Show keyword
-        Route::post('store', 'store')->name('store');                   // Handle keyword creation
-        Route::post('destroy', 'destroy')->name('destroy');             // Handle keyword destroy
+        Route::get('trending', 'index')->name('trending.index'); // List top trending videos
     });
 
-// Price alert routes (under coins namespace)
-Route::prefix('coins/price-alert-settings')
-    ->name('coins.price-alert-settings.')
-    ->controller(CoinAlertSettingsController::class)
-    ->group(function () {
-        Route::get('/', 'index')->name('index');                        // Show all price alert settings
-        Route::get('/{id}/edit', 'edit')->name('edit');                 // Show edit form for a specific alert
-        Route::put('/{id}', 'update')->name('update');                  // Update a specific alert
-        Route::patch('/{id}/toggle', 'toggleStatus')->name('toggle');   // Toggle on/off status for a specific alert
-    });
+// Fallback route: catch all undefined URLs
+// Redirects to /404 page but avoids redirect loop
+Route::fallback(function () {
+    return redirect('/404');
+});
 
-// Favorite toggle route (used via AJAX from Blade)
-Route::post('favorites/toggle', [FavoriteCoinController::class, 'favoritesToggle'])->name('favorites.toggle');
+// Status code 404 ensures proper HTTP response
+Route::get('/404', function () {
+    return response()->view('errors.404', [], 404);
+});

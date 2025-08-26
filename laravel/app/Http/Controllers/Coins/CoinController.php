@@ -2,8 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Coins;
 
+use App\Http\Controllers\Controller;
 use App\Services\Coin\CoinServiceInterface;
 use App\Services\Coin\FavoriteCoinServiceInterface;
 use Illuminate\Contracts\View\View;

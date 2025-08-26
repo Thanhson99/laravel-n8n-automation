@@ -17,7 +17,7 @@ class FavoriteCoinControllerTest extends TestCase
      */
     public function test_it_can_add_coin_to_favorites(): void
     {
-        $response = $this->postJson(route('favorites.toggle'), [
+        $response = $this->postJson(route('coins.favorites.toggle'), [
             'symbol' => 'BTCUSDT',
         ]);
 
@@ -38,7 +38,7 @@ class FavoriteCoinControllerTest extends TestCase
     {
         FavoriteCoin::create(['symbol' => 'BTCUSDT']);
 
-        $response = $this->postJson(route('favorites.toggle'), [
+        $response = $this->postJson(route('coins.favorites.toggle'), [
             'symbol' => 'BTCUSDT',
         ]);
 
@@ -57,7 +57,7 @@ class FavoriteCoinControllerTest extends TestCase
      */
     public function test_it_returns_error_for_invalid_symbol(): void
     {
-        $response = $this->postJson(route('favorites.toggle'), [
+        $response = $this->postJson(route('coins.favorites.toggle'), [
             'symbol' => '!!!',
         ]);
 

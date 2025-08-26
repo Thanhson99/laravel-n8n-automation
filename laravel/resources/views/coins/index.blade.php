@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @push('meta')
-    <meta name="toggle-favorite-url" content="{{ route('favorites.toggle') }}">
+    <meta name="toggle-favorite-url" content="{{ route('coins.favorites.toggle') }}">
 @endpush
 
 @section('title', 'Top Coins')

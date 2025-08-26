@@ -20,13 +20,18 @@
 
 @php
     /**
-     * Build the custom body data attribute for layout
+     * Build the custom body id and data attribute for layout
      *
-     * @var string $pageId    Page identifier from child view
-     * @var string $bodyData  Final body data attributes
+     * @var string $rawPageId  Page identifier from child view
+     * @var string $pageId     Normalized page ID
+     * @var string $bodyData   Final body attributes
      */
-    $pageId = trim($__env->yieldContent('page_id'));
-    $bodyData = trim($layoutHelper->makeBodyData() . ' data-page=' . $pageId);
+    $rawPageId = trim($__env->yieldContent('page_id'));
+
+    // Normalize page ID: lowercase, replace spaces & non-alphanum with dash
+    $pageId = strtolower(preg_replace('/[^a-z0-9]+/', '-', $rawPageId));
+
+    $bodyData = trim($layoutHelper->makeBodyData() . ' id="' . $pageId . '" data-page="' . $pageId . '"');
 @endphp
 
 <!-- Output body attributes without escaping quotes -->
