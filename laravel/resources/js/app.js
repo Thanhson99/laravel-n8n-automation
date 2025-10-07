@@ -33,7 +33,6 @@ document.addEventListener('DOMContentLoaded', async () => {
             case 'keywords':
                 await import('./pages/coins/keywords/keywords-create.js');
                 break;
-            
 
             // Add more pages below using the same pattern
             // example-page → ./pages/example/example-page.js → Description

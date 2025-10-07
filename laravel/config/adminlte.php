@@ -319,6 +319,18 @@ return [
                 ],
             ],
         ],
+        // Video Automation
+        ['header' => 'VIDEO AUTOMATION'],
+        [
+            'text' => 'Videos',
+            'icon' => 'fas fa-video',
+            'submenu' => [
+                [
+                    'text' => 'Top Trending Videos',
+                    'route' => 'video-automation.trending.index',
+                ],
+            ],
+        ],
     ],
 
     /*

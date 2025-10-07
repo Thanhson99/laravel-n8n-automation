@@ -1,0 +1,38 @@
+// ===============================
+// Global Color Variables
+// ===============================
+
+// --- Neutral colors
+$color-black: #13242C;  // Base black, used for text and outlines
+$color-white: #fff;     // Pure white, commonly used for backgrounds
+$color-red-1: #D13433;  // Bright red, primary accent for errors or alerts
+$color-red-2: #932422;  // Darker red, used for shadows or depth
+
+// --- Skin tones
+$color-skin-1: #EAB08C; // Light skin tone
+$color-skin-2: #D9766C; // Medium skin tone
+$color-skin-3: #B2524D; // Darker skin tone
+
+// --- Hair & wood tones
+$color-hair:   #13242C; // Default hair color (dark)
+$color-wood-1: #601513; // Deep wood tone, primary
+$color-wood-2: #410A09; // Darker wood tone, secondary
+
+// --- Special UI colors
+$color-body-page-error: #FF7F2E; // Highlight for error pages (orange)
+
+// ===============================
+// Colors & timing for 404 page
+// ===============================
+
+// --- Color variables
+$button: hsl(0, 0%, 100%);
+$button-color: hsl(0, 0%, 4%);
+$shadow: hsl(0, 0%, 0%);
+$bg: hsl(53, 0%, 45%);
+$header: hsl(53, 0%, 48%);
+$color-text: hsl(0, 0%, 98%);
+$lit-header: hsl(53, 0%, 90%);
+
+// --- Animation speed
+$speed: 2s;

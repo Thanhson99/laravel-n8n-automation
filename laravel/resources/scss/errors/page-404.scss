@@ -1,0 +1,167 @@
+@use '../modules/variables' as *; // Import SCSS variables
+
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@800&family=Roboto:wght@100;300&display=swap'); // Import Google Fonts
+
+// ==============================
+// Global Reset & 3D Settings
+// ==============================
+* {
+	box-sizing: border-box; // Consistent box sizing
+	transform-style: preserve-3d; // Enable 3D transform for all elements
+}
+
+// ==============================
+// CSS Custom Properties
+// ==============================
+// Define custom properties for swing animation
+@property --swing-x {
+	initial-value: 0;
+	inherits: false;
+	syntax: '<integer>';
+}
+
+@property --swing-y {
+	initial-value: 0;
+	inherits: false;
+	syntax: '<integer>';
+}
+
+// ==============================
+// Page Scope
+// ==============================
+body#error-404 {
+	margin: auto; // Center page content
+	background: $bg; // Background color from variables
+	color: $color-text; // Default text color
+	perspective: 1200px; // Perspective for 3D effect
+	font-family: 'Roboto', sans-serif; // Default font
+
+
+	// ==============================
+	// Main Wrapper for Error Page
+	// ==============================
+	.error-404 {
+		min-height: 100vh; // Full viewport height
+		display: flex; // Enable flex layout
+		flex-direction: column; // Stack elements vertically
+		align-items: center; // Center horizontally
+		justify-content: center; // Center vertically
+		position: relative;
+		overflow: hidden;
+		padding: 2rem;
+
+		h1 {
+			position: relative;
+			z-index: 30; // Ensure above other elements
+			animation: swing $speed infinite alternate ease-in-out; // Swing animation
+			font-size: clamp(5rem, 40vmin, 20rem); // Responsive font size
+			font-family: 'Open Sans', sans-serif;
+			margin: 0 0 1rem 0;
+			letter-spacing: 1rem; // Space between characters
+			transform: translate3d(0, 0, 0vmin);
+			--x: calc(50% + (var(--swing-x) * 0.5) * 1%);
+			background: radial-gradient($lit-header, $header 45%) var(--x) 100% / 200% 200%;
+			-webkit-background-clip: text; // Clip gradient to text
+			background-clip: text;
+			color: transparent; // Make text transparent to show gradient
+
+			&::after {
+				content: "404"; // Duplicate text for shadow
+				position: absolute;
+				top: 0;
+				left: 0;
+				z-index: 10;
+				animation: swing $speed infinite alternate ease-in-out;
+				color: $shadow; // Shadow color
+				filter: blur(1.5vmin); // Apply blur for depth
+				transform: scale(1.05) translate3d(0, 12%, -10vmin) translate(calc((var(--swing-x, 0) * 0.05) * 1%), calc((var(--swing-y) * 0.05) * 1%));
+			}
+		}
+	}
+
+	// ==============================
+	// Cloak Background
+	// ==============================
+	.cloak__wrapper {
+		position: fixed;
+		inset: 0;
+		overflow: hidden;
+		pointer-events: none;
+		z-index: 0; // Behind main content
+	}
+
+	.cloak__container {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		width: 250vmax; // Huge circle to cover screen
+		height: 250vmax;
+		transform: translate(-50%, -50%);
+		border-radius: 50%; // Make it circular
+		overflow: hidden;
+		z-index: 0;
+		will-change: transform; // Performance optimization
+	}
+
+	.cloak {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		border-radius: 50%;
+		transform-origin: 50% 30%;
+		animation: swing $speed infinite alternate-reverse ease-in-out; // Inverse swing animation
+		transform: rotate(calc(var(--swing-x) * -0.25deg));
+		background: radial-gradient(40% 40% at 50% 42%, transparent, black 35%);
+		z-index: 0;
+		pointer-events: none;
+	}
+
+	// ==============================
+	// Info Section
+	// ==============================
+	.info {
+		z-index: 40; // Above all decorative layers
+		text-align: center;
+		line-height: 1.5;
+		max-width: clamp(16rem, 90vmin, 25rem);
+		margin-top: 1.5rem;
+
+		p {
+			margin-bottom: 3rem; // Spacing below paragraph
+		}
+
+		.home-btn {
+			text-transform: uppercase;
+			text-decoration: none;
+			background: $button; // Button background color
+			color: $button-color; // Button text color
+			padding: 1rem 4rem;
+			border-radius: 4rem; // Rounded button
+			font-size: 0.875rem;
+			letter-spacing: 0.05rem;
+		}
+	}
+}
+
+// ==============================
+// Animation Keyframes
+// ==============================
+@keyframes swing {
+	0% {
+		--swing-x: -100;
+		--swing-y: -100;
+	}
+
+	// Start left & up
+	50% {
+		--swing-y: 0;
+	}
+
+	// Move to center
+	100% {
+		--swing-y: -100;
+		--swing-x: 100;
+	}
+}

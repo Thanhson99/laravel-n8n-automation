@@ -2,8 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Coins;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreFeedKeywordRequest;
 use App\Services\Coin\FeedKeywordService;
 use Exception;
