@@ -6,8 +6,8 @@ namespace App\Http\Controllers\VideoAutomation;
 
 use App\Http\Controllers\Controller;
 use App\Services\Python\PythonService;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Http;
 
 /**
  * Class TrendingVideoController
@@ -22,16 +22,15 @@ class TrendingVideoController extends Controller
     {
         $this->pythonService = $pythonService;
     }
+
     /**
      * Display trending Douyin videos.
-     *
-     * @param Request $request
-     * @return \Illuminate\View\View
      */
-    public function index(Request $request)
+    public function index(Request $request): JsonResponse
     {
+        /** @var array<string, mixed> $result */
         $result = $this->pythonService->trendingKeywords();
-        dd($result);
-        return response()->json(json_decode($result, true));
+
+        return response()->json($result);
     }
 }

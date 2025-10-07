@@ -4,74 +4,22 @@
 @section('body_id', 'error-404')
 
 @section('content')
+<div class="error-404">
+    <h1 aria-hidden="true">404</h1>
 
-<div class="text">
-    <p>404</p>
-</div>
-
-<div class="sky">
-    <div class="sun" aria-hidden="true"></div>
-
-    <!-- hanging lamp -->
-    <div class="lamp" aria-hidden="true">
-        <div class="cord"></div>
-        <div class="bulb"></div>
-    </div>
-</div>
-
-<div class="container">
-    <!-- caveman left -->
-    <div class="caveman">
-        <div class="leg">
-            <div class="foot">
-                <div class="fingers"></div>
-            </div>
-        </div>
-        <div class="leg">
-            <div class="foot">
-                <div class="fingers"></div>
-            </div>
-        </div>
-        <div class="shape">
-            <div class="circle"></div>
-            <div class="circle"></div>
-        </div>
-        <div class="head">
-            <div class="eye">
-                <div class="nose"></div>
-            </div>
-            <div class="mouth"></div>
-        </div>
-        <div class="arm-right">
-            <div class="club"></div>
+    <div class="cloak__wrapper" aria-hidden="true">
+        <div class="cloak__container">
+            <div class="cloak"></div>
         </div>
     </div>
-    
-    <!-- caveman right -->
-    <div class="caveman">
-        <div class="leg">
-            <div class="foot">
-                <div class="fingers"></div>
-            </div>
-        </div>
-        <div class="leg">
-            <div class="foot">
-                <div class="fingers"></div>
-            </div>
-        </div>
-        <div class="shape">
-            <div class="circle"></div>
-            <div class="circle"></div>
-        </div>
-        <div class="head">
-            <div class="eye">
-                <div class="nose"></div>
-            </div>
-            <div class="mouth"></div>
-        </div>
-        <div class="arm-right">
-            <div class="club"></div>
-        </div>
+
+    <div class="info" role="note">
+        <h2>We can't find that page</h2>
+        <p>
+            We're fairly sure that page used to be here, but seems to have gone missing.
+            We do apologise on its behalf.
+        </p>
+        <a href="{{ url('/') }}" rel="noreferrer noopener" class="home-btn">Home</a>
     </div>
 </div>
 @endsection

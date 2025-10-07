@@ -1,714 +1,167 @@
-@use '../modules/variables' as *;
+@use '../modules/variables' as *; // Import SCSS variables
 
-#error-404 {
-	background-color: $color-body-page-error;
-	font-family: 'Arial', sans-serif;
-	margin: 0;
-	overflow: hidden;
-	padding: 0;
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@800&family=Roboto:wght@100;300&display=swap'); // Import Google Fonts
 
-	@mixin position {
-		position: absolute;
+// ==============================
+// Global Reset & 3D Settings
+// ==============================
+* {
+	box-sizing: border-box; // Consistent box sizing
+	transform-style: preserve-3d; // Enable 3D transform for all elements
+}
+
+// ==============================
+// CSS Custom Properties
+// ==============================
+// Define custom properties for swing animation
+@property --swing-x {
+	initial-value: 0;
+	inherits: false;
+	syntax: '<integer>';
+}
+
+@property --swing-y {
+	initial-value: 0;
+	inherits: false;
+	syntax: '<integer>';
+}
+
+// ==============================
+// Page Scope
+// ==============================
+body#error-404 {
+	margin: auto; // Center page content
+	background: $bg; // Background color from variables
+	color: $color-text; // Default text color
+	perspective: 1200px; // Perspective for 3D effect
+	font-family: 'Roboto', sans-serif; // Default font
+
+
+	// ==============================
+	// Main Wrapper for Error Page
+	// ==============================
+	.error-404 {
+		min-height: 100vh; // Full viewport height
+		display: flex; // Enable flex layout
+		flex-direction: column; // Stack elements vertically
+		align-items: center; // Center horizontally
+		justify-content: center; // Center vertically
+		position: relative;
+		overflow: hidden;
+		padding: 2rem;
+
+		h1 {
+			position: relative;
+			z-index: 30; // Ensure above other elements
+			animation: swing $speed infinite alternate ease-in-out; // Swing animation
+			font-size: clamp(5rem, 40vmin, 20rem); // Responsive font size
+			font-family: 'Open Sans', sans-serif;
+			margin: 0 0 1rem 0;
+			letter-spacing: 1rem; // Space between characters
+			transform: translate3d(0, 0, 0vmin);
+			--x: calc(50% + (var(--swing-x) * 0.5) * 1%);
+			background: radial-gradient($lit-header, $header 45%) var(--x) 100% / 200% 200%;
+			-webkit-background-clip: text; // Clip gradient to text
+			background-clip: text;
+			color: transparent; // Make text transparent to show gradient
+
+			&::after {
+				content: "404"; // Duplicate text for shadow
+				position: absolute;
+				top: 0;
+				left: 0;
+				z-index: 10;
+				animation: swing $speed infinite alternate ease-in-out;
+				color: $shadow; // Shadow color
+				filter: blur(1.5vmin); // Apply blur for depth
+				transform: scale(1.05) translate3d(0, 12%, -10vmin) translate(calc((var(--swing-x, 0) * 0.05) * 1%), calc((var(--swing-y) * 0.05) * 1%));
+			}
+		}
 	}
 
-	@mixin top50 {
+	// ==============================
+	// Cloak Background
+	// ==============================
+	.cloak__wrapper {
+		position: fixed;
+		inset: 0;
+		overflow: hidden;
+		pointer-events: none;
+		z-index: 0; // Behind main content
+	}
+
+	.cloak__container {
 		position: absolute;
 		top: 50%;
-		transform: translateY(-50%);
-	}
-
-	@mixin left50 {
 		left: 50%;
-		position: absolute;
-		transform: translateX(-50%);
-	}
-
-	@mixin centered {
-		left: 50%;
-		position: absolute;
-		top: 50%;
+		width: 250vmax; // Huge circle to cover screen
+		height: 250vmax;
 		transform: translate(-50%, -50%);
+		border-radius: 50%; // Make it circular
+		overflow: hidden;
+		z-index: 0;
+		will-change: transform; // Performance optimization
 	}
 
-	.text {
-		@include centered;
-		color: rgba($color-black, 0.1);
-		font-size: 30em;
+	.cloak {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		border-radius: 50%;
+		transform-origin: 50% 30%;
+		animation: swing $speed infinite alternate-reverse ease-in-out; // Inverse swing animation
+		transform: rotate(calc(var(--swing-x) * -0.25deg));
+		background: radial-gradient(40% 40% at 50% 42%, transparent, black 35%);
+		z-index: 0;
+		pointer-events: none;
+	}
+
+	// ==============================
+	// Info Section
+	// ==============================
+	.info {
+		z-index: 40; // Above all decorative layers
 		text-align: center;
-		top: 40%;
+		line-height: 1.5;
+		max-width: clamp(16rem, 90vmin, 25rem);
+		margin-top: 1.5rem;
 
 		p {
-			margin: 0;
+			margin-bottom: 3rem; // Spacing below paragraph
+		}
+
+		.home-btn {
+			text-transform: uppercase;
+			text-decoration: none;
+			background: $button; // Button background color
+			color: $button-color; // Button text color
+			padding: 1rem 4rem;
+			border-radius: 4rem; // Rounded button
+			font-size: 0.875rem;
+			letter-spacing: 0.05rem;
 		}
 	}
+}
 
-	.sky {
-		@include position;
-		inset: 0;
-		z-index: 0; // dưới mọi thứ
-		// gradient nền “chuyển mùa” theo chu kỳ
-		background: linear-gradient(180deg, $sky-dawn 0%, lighten($sky-dawn, 10%) 100%);
-		animation: day-night-bg 12s linear infinite;
-		overflow: hidden;
+// ==============================
+// Animation Keyframes
+// ==============================
+@keyframes swing {
+	0% {
+		--swing-x: -100;
+		--swing-y: -100;
 	}
 
-	/* Mặt trời */
-	.sun {
-		@include position;
-		top: 60%;
-		left: -10vmin;
-		height: 14vmin;
-		width: 14vmin;
-		border-radius: 50%;
-		background: radial-gradient(circle at 35% 35%, #fff7d6 0%, #ffd36e 45%, #ffb347 70%, rgba($color-black, 0.05) 100%);
-		box-shadow:
-			0 0 40px 8px rgba(255, 211, 110, 0.8),
-			0 0 80px 16px rgba(255, 179, 71, 0.4);
-		animation: sun-path 12s linear infinite;
-		will-change: transform, opacity;
+	// Start left & up
+	50% {
+		--swing-y: 0;
 	}
 
-	/* Đèn thả */
-	.lamp {
-		@include position;
-		right: 6%;
-		top: -180px; // ban ngày kéo lên
-		width: 24px;
-		height: 220px;
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		animation: lamp-drop 12s linear infinite;
-		will-change: transform;
-
-		.cord {
-			flex: 1;
-			width: 2px;
-			background: rgba($color-black, 0.35);
-		}
-
-		.bulb {
-			position: relative;
-			width: 54px;
-			height: 54px;
-			border-radius: 50%;
-			background: linear-gradient(180deg, #ddd 0%, #bbb 100%);
-			border: 2px solid rgba($color-black, 0.2);
-			box-shadow: none;
-			transition: box-shadow 0.3s ease, background 0.3s ease;
-
-			// ánh sáng đổ
-			&:after {
-				content: "";
-				@include position;
-				left: 50%;
-				top: 100%;
-				transform: translateX(-50%);
-				width: 220px;
-				height: 220px;
-				background: radial-gradient(ellipse at 50% 0%, rgba($lamp-yellow, 0.45) 0%, rgba($lamp-amber, 0.25) 30%, transparent 70%);
-				filter: blur(1px);
-				opacity: 0; // ban ngày tắt
-				pointer-events: none;
-			}
-		}
-	}
-
-	/* Đặt layer caveman & text lên trên bầu trời */
-	.text,
-	.container,
-	.caveman {
-		position: relative;
-		z-index: 2;
-	}
-
-	/* ====== KEYFRAMES ====== */
-	/* Nền bầu trời: dawn -> day -> dusk -> night -> dawn */
-	@keyframes day-night-bg {
-		0% {
-			background: linear-gradient(180deg, $sky-dawn 0%, lighten($sky-dawn, 10%) 100%);
-		}
-
-		20% {
-			background: linear-gradient(180deg, lighten($sky-day, 5%) 0%, $sky-day 100%);
-		}
-
-		45% {
-			background: linear-gradient(180deg, $sky-dusk 0%, darken($sky-dusk, 10%) 100%);
-		}
-
-		60% {
-			background: linear-gradient(180deg, $sky-night 0%, darken($sky-night, 5%) 100%);
-		}
-
-		85% {
-			background: linear-gradient(180deg, $sky-dawn 0%, lighten($sky-dawn, 10%) 100%);
-		}
-
-		100% {
-			background: linear-gradient(180deg, $sky-dawn 0%, lighten($sky-dawn, 10%) 100%);
-		}
-	}
-
-	/* Quỹ đạo mặt trời: đi ngang & lên xuống theo parabol nhẹ, mờ khi đêm */
-	@keyframes sun-path {
-		0% {
-			transform: translate(0vmin, 0vmin);
-			opacity: 1;
-		}
-
-		20% {
-			transform: translate(30vmin, -16vmin);
-			opacity: 1;
-		}
-
-		40% {
-			transform: translate(60vmin, -22vmin);
-			opacity: 0.95;
-		}
-
-		55% {
-			transform: translate(85vmin, -10vmin);
-			opacity: 0.35;
-		}
-
-		// gần hoàng hôn
-		60% {
-			transform: translate(95vmin, 5vmin);
-			opacity: 0;
-		}
-
-		// khuất
-		85% {
-			transform: translate(140vmin, 5vmin);
-			opacity: 0;
-		}
-
-		// đêm
-		100% {
-			transform: translate(0vmin, 0vmin);
-			opacity: 1;
-		}
-
-		// về rạng đông
-	}
-
-	/* Đèn: kéo xuống khi đêm (50%→75%), bật sáng; ban ngày kéo lên, tắt */
-	@keyframes lamp-drop {
-		0% {
-			transform: translateY(0px);
-		}
-
-		45% {
-			transform: translateY(0px);
-		}
-
-		// vẫn kéo lên
-		55% {
-			transform: translateY(190px);
-		}
-
-		// bắt đầu thả
-		75% {
-			transform: translateY(190px);
-		}
-
-		// giữ thấp (đêm)
-		100% {
-			transform: translateY(0px);
-		}
-
-		// kéo lên lại
-	}
-
-	/* Bật/tắt ánh sáng bóng đèn đồng bộ theo chu kỳ */
-	.lamp .bulb {
-		animation: bulb-glow 12s linear infinite;
-	}
-
-	@keyframes bulb-glow {
-		0% {
-			background: linear-gradient(180deg, #ddd 0%, #bbb 100%);
-			box-shadow: none;
-		}
-
-		49% {
-			background: linear-gradient(180deg, #ddd 0%, #bbb 100%);
-			box-shadow: none;
-		}
-
-		55% {
-			background: radial-gradient(circle at 50% 40%, #fff 0%, $lamp-yellow 60%, $lamp-amber 100%);
-			box-shadow: 0 0 16px 6px rgba($lamp-yellow, 0.75), 0 0 64px 18px rgba($lamp-amber, 0.35);
-		}
-
-		75% {
-			background: radial-gradient(circle at 50% 40%, #fff 0%, $lamp-yellow 60%, $lamp-amber 100%);
-			box-shadow: 0 0 16px 6px rgba($lamp-yellow, 0.75), 0 0 64px 18px rgba($lamp-amber, 0.35);
-		}
-
-		100% {
-			background: linear-gradient(180deg, #ddd 0%, #bbb 100%);
-			box-shadow: none;
-		}
-	}
-
-	.lamp .bulb:after {
-		animation: bulb-beam 12s linear infinite;
-	}
-
-	@keyframes bulb-beam {
-
-		0%,
-		49% {
-			opacity: 0;
-		}
-
-		55%,
-		75% {
-			opacity: 1;
-		}
-
-		100% {
-			opacity: 0;
-		}
-	}
-
-	.container {
-		@include centered;
-		height: 300px;
-		width: 500px;
-
-		&:after {
-			@include position;
-			content: "";
-			background-color: rgba($color-black, 0.1);
-			border-radius: 12px;
-			bottom: 40px;
-			height: 12px;
-			left: 80px;
-			width: 350px;
-			z-index: -1;
-		}
-	}
-
-	.caveman {
-		height: 300px;
-		position: absolute;
-		width: 250px;
-	}
-
-	.caveman:nth-child(1) {
-		right: 20px;
-	}
-
-	.caveman:nth-child(2) {
-		left: 20px;
-		transform: rotateY(180deg);
-	}
-
-	.head {
-		@include position;
-		background-color: $color-hair;
-		border-radius: 50px;
-		height: 140px;
-		left: 60px;
-		top: 25px;
-		width: 65px;
-
-		&:after,
-		&:before {
-			content: "";
-			@include position;
-			background-color: $color-black;
-			border-radius: 10px;
-			height: 20px;
-			width: 7px;
-		}
-
-		&:after {
-			left: 35px;
-			top: -8px;
-			transform: rotate(20deg);
-		}
-
-		&:before {
-			left: 30px;
-			top: -8px;
-			transform: rotate(-20deg);
-		}
-
-		.eye {
-			@include left50;
-			background-color: $color-skin-1;
-			border-radius: 50px;
-			height: 16px;
-			left: 45%;
-			top: 40px;
-			width: 48px;
-
-			&:after,
-			&:before {
-				content: "";
-				@include top50;
-				background-color: $color-black;
-				border-radius: 50%;
-				height: 5px;
-				width: 5px;
-			}
-
-			&:after {
-				left: 5px;
-			}
-
-			&:before {
-				right: 9px;
-			}
-
-			.nose {
-				@include centered;
-				background-color: $color-skin-2;
-				border-left: 8px solid rgba($color-black, 0.1);
-				border-radius: 10px;
-				box-sizing: border-box;
-				height: 35px;
-				left: 45%;
-				top: 12px;
-				width: 15px;
-			}
-		}
-	}
-
-	.shape {
-		@include left50;
-		border-radius: 50%;
-		height: 140px;
-		overflow: hidden;
-		top: 70px;
-		width: 140px;
-
-		.circle {
-			@include position;
-			border-radius: 50%;
-			height: 60px;
-			width: 60px;
-
-			&:after,
-			&:before {
-				content: "";
-				@include position;
-				border-radius: 50%;
-				height: 20px;
-				width: 20px;
-			}
-
-			&:after {
-				left: 50px;
-				top: 10px;
-			}
-
-			&:before {
-				left: 60px;
-				top: 45px;
-			}
-		}
-
-		.circle:nth-child(1) {
-			left: -12px;
-			top: 80px;
-		}
-
-		.circle:nth-child(2) {
-			right: 10px;
-			top: 0px;
-			transform: rotate(90deg);
-
-			&:after {
-				left: 65px;
-				top: 10px;
-			}
-
-			&:before {
-				display: none;
-			}
-		}
-	}
-
-	.caveman:nth-child(1) .shape {
-		background-color: $color-red-1;
-
-		.circle {
-			background-color: $color-red-2;
-
-			&:after,
-			&:before {
-				background-color: $color-red-2;
-			}
-		}
-	}
-
-	.caveman:nth-child(2) .shape {
-		background-color: $color-red-2;
-
-		.circle {
-			background-color: $color-red-1;
-
-			&:after,
-			&:before {
-				background-color: $color-red-1;
-			}
-		}
-	}
-
-	.arm-right {
-		@include position;
-		background-color: $color-skin-1;
-		border-left: 8px solid rgba($color-black, 0.1);
-		border-radius: 50px;
-		box-sizing: border-box;
-		height: 180px;
-		left: 135px;
-		top: 80px;
-		transform-origin: 30px 30px;
-		width: 60px;
-		z-index: 1;
-
-		.club {
-			@include position;
-			border-bottom: 110px solid $color-wood-1;
-			border-left: 10px solid transparent;
-			border-right: 10px solid transparent;
-			height: 0;
-			left: -60px;
-			top: 120px;
-			transform: rotate(70deg);
-			width: 20px;
-
-			&:after,
-			&:before {
-				@include position;
-				content: "";
-				background-color: $color-wood-1;
-				border-radius: 50%;
-				left: 0;
-			}
-
-			&:after {
-				height: 20px;
-				width: 20px;
-				top: -10px;
-			}
-
-			&:before {
-				height: 40px;
-				width: 40px;
-				left: -10px;
-				top: 90px;
-			}
-		}
-	}
-
-	.leg {
-		@include position;
-		border-radius: 10px;
-		height: 55px;
-		top: 200px;
-		width: 10px;
-
-		&:after {
-			@include position;
-			content: "";
-			border-radius: 50%;
-			height: 10px;
-			left: -5px;
-			top: 15px;
-			width: 10px;
-		}
-
-		.foot {
-			@include position;
-			border-radius: 25px 25px 0 0;
-			height: 25px;
-			left: -38px;
-			top: 30px;
-			width: 50px;
-
-			&:after,
-			&:before,
-			.fingers,
-			.fingers:after {
-				@include position;
-				background-color: $color-skin-1;
-				border-radius: 50%;
-				bottom: 0px;
-				height: 15px;
-				transform-origin: bottom;
-				width: 15px;
-			}
-
-			&:after {
-				left: -6px;
-				content: "";
-			}
-
-			&:before {
-				left: 8px;
-				transform: scale(0.6);
-				content: "";
-			}
-
-			.fingers {
-				left: 15px;
-				transform: scale(0.6);
-			}
-
-			.fingers:after {
-				left: 11px;
-				content: "";
-			}
-		}
-	}
-
-	.leg:nth-child(1) {
-		background-color: $color-skin-3;
-		left: 95px;
-
-		&:after {
-			background-color: $color-skin-3;
-		}
-
-		.foot {
-			background-color: $color-skin-3;
-
-			&:after {
-				background-color: $color-skin-3;
-			}
-
-			&:before {
-				display: none;
-			}
-		}
-	}
-
-	.leg:nth-child(2) {
-		background-color: $color-skin-2;
-		left: 115px;
-
-		&:after {
-			background-color: $color-skin-2;
-		}
-
-		.foot {
-			background-color: $color-skin-2;
-		}
-	}
-
-	.caveman:nth-child(1) .arm-right {
-		animation: arm-anima 1.2s infinite cubic-bezier(.55, .01, .16, 1.34);
-	}
-
-	.caveman:nth-child(2) .arm-right {
-		animation: arm-anima 1.2s infinite cubic-bezier(.55, .01, .16, 1.34);
-		animation-delay: 0.6s;
-	}
-
-	@keyframes arm-anima {
-		0% {
-			transform: rotate(0)
-		}
-
-		100% {
-			transform: rotate(-360deg)
-		}
-	}
-
-	.caveman:nth-child(2) .head {
-		animation: head-anima 1.2s infinite cubic-bezier(.55, .01, .16, 1.34);
-	}
-
-	.caveman:nth-child(1) .head {
-		animation: head-anima 1.2s infinite cubic-bezier(.55, .01, .16, 1.34);
-		animation-delay: 0.6s;
-	}
-
-	@keyframes head-anima {
-		0% {
-			top: 25px;
-		}
-
-		42% {
-			top: 25px;
-		}
-
-		45% {
-			top: 50px;
-		}
-
-		100% {
-			top: 25px;
-		}
-	}
-
-	.caveman:nth-child(2) .eye:after,
-	.caveman:nth-child(2) .eye:before {
-		animation: eye-anima 1.2s infinite cubic-bezier(.55, .01, .16, 1.34);
-	}
-
-	.caveman:nth-child(1) .eye:after,
-	.caveman:nth-child(1) .eye:before {
-		animation: eye-anima 1.2s infinite cubic-bezier(.55, .01, .16, 1.34);
-		animation-delay: 0.6s;
-	}
-
-	@keyframes eye-anima {
-		0% {
-			height: 5px;
-		}
-
-		42% {
-			height: 5px;
-		}
-
-		45% {
-			height: 1px;
-		}
-
-		100% {
-			height: 5px;
-		}
-	}
-
-	.container {
-		&:after {
-			animation: shadow-anima 1.2s infinite cubic-bezier(.55, .01, .16, 1.34);
-			animation-delay: 0.1s;
-		}
-	}
-
-	@keyframes shadow-anima {
-		0% {
-			width: 350px;
-			left: 80px;
-		}
-
-		25% {
-			width: 450px;
-			left: 80px;
-		}
-
-		50% {
-			width: 350px;
-			left: 80px;
-		}
-
-		75% {
-			width: 450px;
-			left: 0px;
-		}
-
-		100% {
-			width: 350px;
-			left: 80px;
-		}
+	// Move to center
+	100% {
+		--swing-y: -100;
+		--swing-x: 100;
 	}
 }

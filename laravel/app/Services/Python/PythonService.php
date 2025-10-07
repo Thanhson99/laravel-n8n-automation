@@ -14,17 +14,20 @@ class PythonService
 
     public function __construct()
     {
-        $this->baseUrl = config('services.python.base_url');
+        // Ensure base URL is always a string
+        $base = config('services.python.base_url');
+        $this->baseUrl = is_string($base) ? $base : '';
     }
 
     /**
      * Call Douyin downloader endpoint.
      *
-     * @return array
+     * @return array<string, mixed>
      */
     public function downloadVideo(): array
     {
-        $url = $this->baseUrl . config('services.python.douyin_path');
+        $path = config('services.python.douyin_path');
+        $url = $this->baseUrl.(is_string($path) ? $path : '');
 
         return $this->call($url);
     }
@@ -32,11 +35,12 @@ class PythonService
     /**
      * Call AI Caption generator endpoint.
      *
-     * @return array
+     * @return array<string, mixed>
      */
     public function generateCaption(): array
     {
-        $url = $this->baseUrl . config('services.python.caption_path');
+        $path = config('services.python.caption_path');
+        $url = $this->baseUrl.(is_string($path) ? $path : '');
 
         return $this->call($url);
     }
@@ -44,31 +48,40 @@ class PythonService
     /**
      * Call Trending keywords endpoint.
      *
-     * @return array
+     * @return array<string, mixed>
      */
     public function trendingKeywords(): array
     {
-        $url = $this->baseUrl . config('services.python.trending_path');
-        
+        $path = config('services.python.trending_path');
+        $url = $this->baseUrl.(is_string($path) ? $path : '');
+
         return $this->call($url);
     }
 
     /**
      * Generic HTTP GET call to Python service.
      *
-     * @param string $url
-     * @return array
+     * @return array<string, mixed>
      */
     protected function call(string $url): array
     {
         $response = Http::get($url);
 
         if ($response->failed()) {
-            // log error
-            Log::error("Python service call failed: $url", $response->json());
+            Log::error("Python service call failed: {$url}", (array) $response->json());
+
             return [];
         }
 
-        return $response->json();
+        $data = $response->json();
+
+        if (! is_array($data) || empty($data)) {
+            return [];
+        }
+
+        return array_combine(
+            array_map('strval', array_keys($data)),
+            array_values($data)
+        );
     }
 }

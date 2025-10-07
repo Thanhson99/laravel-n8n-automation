@@ -33,12 +33,6 @@ document.addEventListener('DOMContentLoaded', async () => {
             case 'keywords':
                 await import('./pages/coins/keywords/keywords-create.js');
                 break;
-            
-            // error-404 → ./errors/error-404.js
-            // Handles custom 404 page
-            case 'error-404':
-                await import('./errors/error-404.js');
-                break;
 
             // Add more pages below using the same pattern
             // example-page → ./pages/example/example-page.js → Description

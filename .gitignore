@@ -25,7 +25,8 @@ laravel/.phpunit.result.cache
 /n8n/files
 /n8n/database.sqlite
 /n8n/.env
-/n8n/node_modules/
+/n8n/nodes/
+/n8n/nodes/node_modules/
 /n8n/tmp/
 
 # ---- Docker ----

@@ -1,8 +1,8 @@
 <?php
 
-use App\Http\Controllers\Coins\FavoriteCoinController;
 use App\Http\Controllers\Coins\CoinAlertSettingsController;
 use App\Http\Controllers\Coins\CoinController;
+use App\Http\Controllers\Coins\FavoriteCoinController;
 use App\Http\Controllers\Coins\FeedKeywordController;
 use App\Http\Controllers\VideoAutomation\TrendingVideoController;
 use Illuminate\Support\Facades\Route;

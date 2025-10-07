@@ -22,12 +22,17 @@ $color-wood-2: #410A09; // Darker wood tone, secondary
 $color-body-page-error: #FF7F2E; // Highlight for error pages (orange)
 
 // ===============================
-// Day/Night Theme Colors
+// Colors & timing for 404 page
 // ===============================
-$sky-dawn:    #ffd4a3;              // Dawn (warm orange/pink sky)
-$sky-day:     #87ceeb;              // Day (light blue sky)
-$sky-dusk:    #f6a1a1;              // Dusk (soft pink/red sky)
-$sky-night:   #0b1b3a;              // Night (deep navy sky)
-$moon-glow:   rgba(255, 255, 255, 0.35); // Moon glow effect
-$lamp-yellow: #ffd86b;              // Artificial lamp light (soft yellow)
-$lamp-amber:  #ffb84d;              // Amber lamp tone (warm accent)
+
+// --- Color variables
+$button: hsl(0, 0%, 100%);
+$button-color: hsl(0, 0%, 4%);
+$shadow: hsl(0, 0%, 0%);
+$bg: hsl(53, 0%, 45%);
+$header: hsl(53, 0%, 48%);
+$color-text: hsl(0, 0%, 98%);
+$lit-header: hsl(53, 0%, 90%);
+
+// --- Animation speed
+$speed: 2s;

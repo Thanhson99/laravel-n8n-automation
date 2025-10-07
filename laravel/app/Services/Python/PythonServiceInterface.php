@@ -10,9 +10,8 @@ interface PythonServiceInterface
     /**
      * Execute a Python script with given arguments.
      *
-     * @param  string  $scriptName
-     * @param  array   $args
-     * @return string|null
+     * @param  array<string, string|int|float>  $args  Arguments passed to Python script
+     * @return string|null Script output or null on failure
      */
     public function runScript(string $scriptName, array $args = []): ?string;
 }
